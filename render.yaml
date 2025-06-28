@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: devcortex-ai
+    env: go
+    buildCommand: go mod tidy && go build -o main ./cmd/web
+    startCommand: ./main
+    plan: free
+    envVars:
+      - key: PORT
+        value: 80
