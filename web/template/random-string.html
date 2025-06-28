@@ -1,0 +1,45 @@
+{{define "content"}}
+<div class="text-center mb-4">
+    <h2><i class="bi bi-shuffle me-2"></i>Random String Generator</h2>
+    <p class="lead text-body-secondary">Güvenli rastgele stringler oluşturun.</p>
+</div>
+<form method="POST" class="mb-4">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <label for="length" class="form-label">Uzunluk:</label>
+            <input type="number" min="4" max="64" class="form-control" id="length" name="length" value="{{if .Data.Length}}{{.Data.Length}}{{else}}16{{end}}">
+        </div>
+        <div class="col-auto">
+            <label class="form-label">Karakter Seti:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="charset" value="lower" id="lower" checked>
+                <label class="form-check-label" for="lower">Küçük Harf</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="charset" value="upper" id="upper" checked>
+                <label class="form-check-label" for="upper">Büyük Harf</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="charset" value="digit" id="digit" checked>
+                <label class="form-check-label" for="digit">Rakam</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="charset" value="symbol" id="symbol">
+                <label class="form-check-label" for="symbol">Sembol</label>
+            </div>
+        </div>
+        <div class="col-auto align-self-end">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Oluştur</button>
+        </div>
+    </div>
+</form>
+{{if .Data.Result}}
+<div class="card">
+    <div class="card-header">Oluşturulan String</div>
+    <div class="card-body">
+        <input class="form-control font-monospace" readonly id="randomStringOutput" value="{{.Data.Result}}">
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('randomStringOutput').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+    </div>
+</div>
+{{end}}
+{{end}}

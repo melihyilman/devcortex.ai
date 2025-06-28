@@ -1,0 +1,28 @@
+{{define "content"}}
+<div class="text-center mb-4">
+    <h2><i class="bi bi-file-code me-2"></i>HTML/CSS/JS Minifier</h2>
+    <p class="lead text-body-secondary">Kodunuzu küçültün ve optimize edin.</p>
+</div>
+<form method="POST" class="mb-4">
+    <div class="mb-3">
+        <textarea class="form-control font-monospace" name="inputText" rows="6" placeholder="HTML, CSS veya JS kodunu buraya yapıştırın...">{{.Data.InputText}}</textarea>
+    </div>
+    <div class="mb-3">
+        <select class="form-select" name="minifyType">
+            <option value="html" {{if or (eq .Data.MinifyType "html") (eq .Data.MinifyType "")}}selected{{end}}>HTML</option>
+            <option value="css" {{if eq .Data.MinifyType "css"}}selected{{end}}>CSS</option>
+            <option value="js" {{if eq .Data.MinifyType "js"}}selected{{end}}>JS</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Küçült</button>
+</form>
+{{if .Data.Result}}
+<div class="card">
+    <div class="card-header">Küçültülmüş Kod</div>
+    <div class="card-body">
+        <textarea class="form-control font-monospace" rows="6" readonly id="minifyResult">{{.Data.Result}}</textarea>
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('minifyResult').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+    </div>
+</div>
+{{end}}
+{{end}}

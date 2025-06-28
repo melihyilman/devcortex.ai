@@ -1,0 +1,31 @@
+{{define "content"}}
+<div class="text-center mb-4">
+    <h2><i class="bi bi-link-45deg me-2"></i>URL Encoder/Decoder</h2>
+    <p class="lead text-body-secondary">Metinleri URL formatına kodlayın veya çözün.</p>
+</div>
+<form method="POST" class="mb-4">
+    <div class="mb-3">
+        <textarea class="form-control font-monospace" name="inputText" rows="4" placeholder="Metni buraya girin...">{{.Data.InputText}}</textarea>
+    </div>
+    <div class="mb-3">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="operation" id="encode" value="encode" {{if or (eq .Data.Operation "encode") (eq .Data.Operation "")}}checked{{end}}>
+            <label class="form-check-label" for="encode">Encode</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="operation" id="decode" value="decode" {{if eq .Data.Operation "decode"}}checked{{end}}>
+            <label class="form-check-label" for="decode">Decode</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>İşlemi Yap</button>
+</form>
+{{if .Data.Result}}
+<div class="card">
+    <div class="card-header">Sonuç</div>
+    <div class="card-body">
+        <textarea class="form-control font-monospace" rows="3" readonly id="urlResult">{{.Data.Result}}</textarea>
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('urlResult').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+    </div>
+</div>
+{{end}}
+{{end}}

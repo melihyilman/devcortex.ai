@@ -1,0 +1,31 @@
+{{define "content"}}
+<div class="text-center mb-4">
+    <h2><i class="bi bi-palette me-2"></i>Color Picker / Converter</h2>
+    <p class="lead text-body-secondary">Renk kodlarını (HEX, RGB, HSL) dönüştürün ve seçin.</p>
+</div>
+<form method="POST" class="mb-4">
+    <div class="row justify-content-center align-items-end">
+        <div class="col-auto">
+            <label for="color" class="form-label">Renk Seç:</label>
+            <input type="color" class="form-control form-control-color" id="color" name="color" value="{{if .Data.Hex}}{{.Data.Hex}}{{else}}#0099ff{{end}}">
+        </div>
+        <div class="col-auto">
+            <label for="hex" class="form-label">HEX:</label>
+            <input type="text" class="form-control font-monospace" id="hex" name="hex" value="{{.Data.Hex}}" placeholder="#0099ff">
+        </div>
+        <div class="col-auto align-self-end">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Dönüştür</button>
+        </div>
+    </div>
+</form>
+{{if .Data.RGB}}
+<div class="row justify-content-center mb-2">
+    <div class="col-auto">
+        <span class="badge bg-primary">RGB: {{.Data.RGB}}</span>
+    </div>
+    <div class="col-auto">
+        <span class="badge bg-success">HSL: {{.Data.HSL}}</span>
+    </div>
+</div>
+{{end}}
+{{end}}

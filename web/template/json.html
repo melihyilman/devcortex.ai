@@ -1,0 +1,30 @@
+{{define "content"}}
+<hgroup class="text-center mb-4">
+<h2><i class="bi bi-braces me-2"></i>JSON Validator & Formatter</h2>
+    <p class="text-body-secondary">JSON verinizi yapısal olarak doğrulayın ve okunaklı, girintili bir şekilde formatlayın.</p>
+</hgroup>
+<form action="/tools/json-formatter" method="POST">
+    <div class="mb-3">
+        <textarea class="form-control font-monospace" name="jsonInput" rows="15" placeholder="JSON verisini buraya yapıştırın...">{{.Data.InputJSON}}</textarea>
+    </div>
+<button type="submit" class="btn btn-primary w-100"><i class="bi bi-check-circle-fill me-2"></i>Doğrula ve Formatla</button>
+</form>
+
+{{if .Data.Result}}
+    {{if .Data.IsValid}}
+    <div class="card mt-4 border-success">
+        <div class="card-header"><i class="bi bi-check-circle-fill me-2"></i>Sonuç: Geçerli JSON</div>
+        <div class="card-body">
+            <pre><code class="text-success font-monospace">{{.Data.Result}}</code></pre>
+        </div>
+    </div>
+    {{else}}
+    <div class="card mt-4 border-danger">
+        <div class="card-header"><i class="bi bi-x-circle-fill me-2"></i>Sonuç: Geçersiz JSON</div>
+        <div class="card-body">
+            <pre><code class="text-danger font-monospace">{{.Data.Result}}</code></pre>
+        </div>
+    </div>
+    {{end}}
+{{end}}
+{{end}}
