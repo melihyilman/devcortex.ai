@@ -1,0 +1,13 @@
+{{define "content"}}
+<div class="container">
+    <h1>SQL Sorgu Otopsisi</h1>
+    <p>SQL sorgularınızın performansını analiz edin ve iyileştirin.</p>
+    <div class="card mt-4">
+        <div class="card-header">SQL Sorgusu</div>
+        <div class="card-body">
+            <p><strong>Sorgu:</strong> <code>{{.ToolSpecificData.SQLQuery}}</code></p>
+            <p><strong>Analiz:</strong> {{.ToolSpecificData.Analysis}}</p>
+        </div>
+    </div>
+</div>
+{{end}}

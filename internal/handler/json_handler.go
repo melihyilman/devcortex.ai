@@ -17,7 +17,7 @@ type JSONData struct {
 func JSONTool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
 		Title: "JSON Validator & Formatter",
-		Data:  JSONData{},
+		ToolSpecificData: nil,
 	}
 
 	if r.Method == http.MethodPost {
@@ -40,10 +40,10 @@ func JSONTool(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		pageData.Data = JSONData{
-			InputJSON: inputJSON,
-			Result:    result,
-			IsValid:   isValid,
+		pageData.ToolSpecificData = map[string]interface{}{
+			"InputJSON": inputJSON,
+			"Result":    result,
+			"IsValid":   isValid,
 		}
 	}
 

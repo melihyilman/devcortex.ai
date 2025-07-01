@@ -8,11 +8,11 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="text1" class="form-label">Metin/Kod 1</label>
-            <textarea class="form-control" id="text1" name="text1" rows="8" required>{{with .Data.Text1}}{{.}}{{end}}</textarea>
+            <textarea class="form-control" id="text1" name="text1" rows="8" required>{{with .ToolSpecificData.Text1}}{{.}}{{end}}</textarea>
         </div>
         <div class="col-md-6">
             <label for="text2" class="form-label">Metin/Kod 2</label>
-            <textarea class="form-control" id="text2" name="text2" rows="8" required>{{with .Data.Text2}}{{.}}{{end}}</textarea>
+            <textarea class="form-control" id="text2" name="text2" rows="8" required>{{with .ToolSpecificData.Text2}}{{.}}{{end}}</textarea>
         </div>
     </div>
     <div class="text-center mb-3">
@@ -20,13 +20,13 @@
     </div>
 </form>
 
-{{if .Data.Diff}}
+{{if .ToolSpecificData.Diff}}
 <div class="card mt-4">
     <div class="card-header">
         <i class="bi bi-list-check me-1"></i> Farklar
     </div>
     <div class="card-body">
-        <pre class="mb-0" style="white-space:pre-wrap;">{{.Data.Diff}}</pre>
+        <pre class="mb-0" style="white-space:pre-wrap;">{{.ToolSpecificData.Diff}}</pre>
     </div>
 </div>
 {{end}}

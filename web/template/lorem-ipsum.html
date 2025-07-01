@@ -7,18 +7,18 @@
     <div class="row justify-content-center">
         <div class="col-auto">
             <label for="paragraphs" class="form-label">Paragraf Sayısı:</label>
-            <input type="number" min="1" max="20" class="form-control" id="paragraphs" name="paragraphs" value="{{if .Data.Paragraphs}}{{.Data.Paragraphs}}{{else}}3{{end}}">
+            <input type="number" min="1" max="20" class="form-control" id="paragraphs" name="paragraphs" value="{{if .ToolSpecificData.Paragraphs}}{{.ToolSpecificData.Paragraphs}}{{else}}3{{end}}">
         </div>
         <div class="col-auto align-self-end">
             <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Oluştur</button>
         </div>
     </div>
 </form>
-{{if .Data.Lorem}}
+{{if .ToolSpecificData.Lorem}}
 <div class="card">
     <div class="card-header">Oluşturulan Lorem Ipsum</div>
     <div class="card-body">
-        <textarea class="form-control font-monospace" rows="8" readonly id="loremOutput">{{.Data.Lorem}}</textarea>
+        <textarea class="form-control font-monospace" rows="8" readonly id="loremOutput">{{.ToolSpecificData.Lorem}}</textarea>
         <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('loremOutput').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
     </div>
 </div>

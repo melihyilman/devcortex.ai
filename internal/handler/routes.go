@@ -13,6 +13,9 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/tools", Tools)
 
 	// Araç rotaları
+	mux.HandleFunc("/tools/cron-explorer", CronExplorerTool)
+	mux.HandleFunc("/tools/regex-deconstructor", RegexDeconstructorTool)
+	mux.HandleFunc("/tools/sql-autopsy", SQLAutopsyTool)
 	mux.HandleFunc("/tools/base64", Base64Tool)
 	mux.HandleFunc("/tools/jwt-decoder", JWTTool)
 	mux.HandleFunc("/tools/hash-generator", HashTool)

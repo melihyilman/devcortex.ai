@@ -1,0 +1,13 @@
+{{define "content"}}
+<div class="container">
+    <h1>Zaman Gezgini (Cron)</h1>
+    <p>Cron ifadelerini analiz edin, görselleştirin ve hatalarını ayıklayın.</p>
+    <div class="card mt-4">
+        <div class="card-header">Cron İfadesi</div>
+        <div class="card-body">
+            <p><strong>İfade:</strong> <code>{{.ToolSpecificData.CronExpression}}</code></p>
+            <p><strong>Açıklama:</strong> {{.ToolSpecificData.Description}}</p>
+        </div>
+    </div>
+</div>
+{{end}}

@@ -5,26 +5,26 @@
 </hgroup>
 <form action="/tools/base64" method="POST">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="İşlenecek metni buraya girin...">{{.Data.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="İşlenecek metni buraya girin...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
     <div class="mb-3 text-center">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="operation" id="opEncode" value="encode" {{if or (eq .Data.Operation "encode") (eq .Data.Operation "")}}checked{{end}}>
+            <input class="form-check-input" type="radio" name="operation" id="opEncode" value="encode" {{if or (eq .ToolSpecificData.Operation "encode") (eq .ToolSpecificData.Operation "")}}checked{{end}}>
             <label class="form-check-label" for="opEncode"><i class="bi bi-arrow-down-circle me-1"></i> Encode</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="operation" id="opDecode" value="decode" {{if eq .Data.Operation "decode"}}checked{{end}}>
+            <input class="form-check-input" type="radio" name="operation" id="opDecode" value="decode" {{if eq .ToolSpecificData.Operation "decode"}}checked{{end}}>
             <label class="form-check-label" for="opDecode"><i class="bi bi-arrow-up-circle me-1"></i> Decode</label>
         </div>
     </div>
 <button type="submit" class="btn btn-primary w-100"><i class="bi bi-gear-fill me-2"></i>İşlemi Yap</button>
 </form>
 
-{{if .Data.Result}}
+{{if .ToolSpecificData.Result}}
 <div class="card mt-4 border-success">
     <div class="card-header">Sonuç:</div>
     <div class="card-body">
-        <pre><code class="text-success font-monospace">{{.Data.Result}}</code></pre>
+        <pre><code class="text-success font-monospace">{{.ToolSpecificData.Result}}</code></pre>
     </div>
 </div>
 {{end}}

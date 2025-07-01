@@ -6,11 +6,11 @@
 <form method="POST" class="mb-4">
     <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Yeni UUID Oluştur</button>
 </form>
-{{if .Data.UUID}}
+{{if .ToolSpecificData.UUID}}
 <div class="card">
     <div class="card-header">Oluşturulan UUID</div>
     <div class="card-body">
-        <input class="form-control font-monospace" readonly id="uuidOutput" value="{{.Data.UUID}}">
+        <input class="form-control font-monospace" readonly id="uuidOutput" value="{{.ToolSpecificData.UUID}}">
         <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('uuidOutput').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
     </div>
 </div>

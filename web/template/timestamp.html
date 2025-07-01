@@ -11,12 +11,12 @@
             <div class="card-body">
                 <form action="/tools/timestamp-converter" method="POST">
                     <div class="mb-3">
-                        <input type="number" class="form-control font-monospace" name="timestamp" placeholder="örn: 1719562257" value="{{.Data.TimestampInput}}">
+                        <input type="number" class="form-control font-monospace" name="timestamp" placeholder="örn: 1719562257" value="{{.ToolSpecificData.TimestampInput}}">
                     </div>
 <button type="submit" class="btn btn-primary w-100" name="action" value="to_date"><i class="bi bi-arrow-right-circle me-2"></i>Dönüştür</button>
                 </form>
-                {{if .Data.ReadableDate}}
-                <p class="mt-3"><strong>Sonuç:</strong> <code class="text-success font-monospace">{{.Data.ReadableDate}}</code></p>
+                {{if .ToolSpecificData.ReadableDate}}
+                <p class="mt-3"><strong>Sonuç:</strong> <code class="text-success font-monospace">{{.ToolSpecificData.ReadableDate}}</code></p>
                 {{end}}
             </div>
         </div>
@@ -27,18 +27,18 @@
             <div class="card-body">
                 <form action="/tools/timestamp-converter" method="POST">
                     <div class="mb-3">
-                        <input type="text" class="form-control font-monospace" name="date_string" placeholder="örn: 2025-06-28 11:10:57" value="{{.Data.DateStringInput}}">
+                        <input type="text" class="form-control font-monospace" name="date_string" placeholder="örn: 2025-06-28 11:10:57" value="{{.ToolSpecificData.DateStringInput}}">
                     </div>
 <button type="submit" class="btn btn-primary w-100" name="action" value="to_timestamp"><i class="bi bi-arrow-left-circle me-2"></i>Dönüştür</button>
                 </form>
-                {{if .Data.TimestampResult}}
-                <p class="mt-3"><strong>Sonuç:</strong> <code class="text-success font-monospace">{{.Data.TimestampResult}}</code></p>
+                {{if .ToolSpecificData.TimestampResult}}
+                <p class="mt-3"><strong>Sonuç:</strong> <code class="text-success font-monospace">{{.ToolSpecificData.TimestampResult}}</code></p>
                 {{end}}
             </div>
         </div>
     </div>
 </div>
-{{if .Data.Error}}
-<div class="alert alert-danger mt-4"><i class="bi bi-exclamation-triangle-fill me-2"></i>{{.Data.Error}}</div>
+{{if .ToolSpecificData.Error}}
+<div class="alert alert-danger mt-4"><i class="bi bi-exclamation-triangle-fill me-2"></i>{{.ToolSpecificData.Error}}</div>
 {{end}}
 {{end}}

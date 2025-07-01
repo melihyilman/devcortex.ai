@@ -1,10 +1,20 @@
-{{ range . }}
+{{ range .FeaturedTools }}
   <div>
-    {{if eq .Name "Hash Generator"}}<i class="bi bi-fingerprint me-2"></i>{{end}}
-    {{if eq .Name "JSON Validator & Formatter"}}<i class="bi bi-braces me-2"></i>{{end}}
-    {{if eq .Name "Base64 Encoder/Decoder"}}<i class="bi bi-shield-lock me-2"></i>{{end}}
-    {{if eq .Name "Unix Zaman Damgası Dönüştürücü"}}<i class="bi bi-clock-history me-2"></i>{{end}}
-    <span>{{ .Name }}</span>
+    <a href="{{.URL}}">
+      <i class="{{.Icon}}"></i>
+      <span>{{ .Name }}</span>
+    </a>
+    <span>{{ .Description }}</span>
+  </div>
+{{ end }}
+
+<h2>Diğer Tüm Araçlar</h2>
+{{ range .OtherTools }}
+  <div>
+    <a href="{{.URL}}">
+      <i class="{{.Icon}}"></i>
+      <span>{{ .Name }}</span>
+    </a>
     <span>{{ .Description }}</span>
   </div>
 {{ end }}

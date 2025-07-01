@@ -2,13 +2,41 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
+	"strings"
 
 	"devcortex.ai/internal/view"
+	"github.com/drhodes/golorem"
 )
 
 func LoremIpsumTool(w http.ResponseWriter, r *http.Request) {
-	data := &view.PageData{
+	pageData := &view.PageData{
 		Title: "Lorem Ipsum Generator",
+		ToolSpecificData: make(map[string]interface{}),
 	}
-	view.Render(w, r, "lorem-ipsum.html", data)
+
+	if r.Method == http.MethodPost {
+		r.ParseForm()
+		paragraphsStr := r.FormValue("paragraphs")
+		paragraphs, err := strconv.Atoi(paragraphsStr)
+		if err != nil || paragraphs <= 0 {
+			paragraphs = 3 // Varsayılan değer
+		}
+		if paragraphs > 20 {
+			paragraphs = 20 // Maksimum değer
+		}
+
+		var loremText []string
+		for i := 0; i < paragraphs; i++ {
+			// golorem paketi her zaman aynı metni üretiyor, bu yüzden farklı paragraflar için farklı uzunluklar kullanabiliriz.
+			// Şimdilik basit tutalım ve aynı paragrafı tekrar edelim.
+			// Daha gelişmiş bir versiyonda, her seferinde farklı metin üretmek için rastgelelik eklenebilir.
+			loremText = append(loremText, lorem.Paragraph(3, 5))
+		}
+
+		pageData.ToolSpecificData.(map[string]interface{})["Lorem"] = strings.Join(loremText, "\n\n")
+		pageData.ToolSpecificData.(map[string]interface{})["Paragraphs"] = paragraphs
+	}
+
+	view.Render(w, r, "lorem-ipsum.html", pageData)
 }

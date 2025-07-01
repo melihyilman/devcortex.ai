@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/golang-jwt/jwt/v4"
 	"devcortex.ai/internal/view"
 )
 
@@ -20,24 +21,26 @@ type JWTData struct {
 func JWTTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "JWT Decoder",
-		Data:  JWTData{},
+		ToolSpecificData: make(map[string]interface{}),
 	}
 
 	if r.Method == http.MethodPost {
-		tokenStr := r.FormValue("jwtToken")
+		tokenString := r.FormValue("jwtToken")
 
-		parts := strings.Split(tokenStr, ".")
-		if len(parts) != 3 {
-			data.Data = JWTData{InputToken: tokenStr, Error: "Geçersiz JWT formatı. Token 3 bölümden oluşmalıdır."}
-		} else {
-			header, err1 := decodeJWTPart(parts[0])
-			payload, err2 := decodeJWTPart(parts[1])
-
-			if err1 != nil || err2 != nil {
-				data.Data = JWTData{InputToken: tokenStr, Error: "Token'ın Header veya Payload kısmı decode edilemedi. Geçersiz Base64."}
+		token, err := jwt.Parse(tokenString, nil)
+		if err != nil {
+			data.ToolSpecificData = map[string]interface{}{"Error": "Token parse hatası: " + err.Error()}
+		} else if token != nil {
+			claims, ok := token.Claims.(jwt.MapClaims)
+			if ok {
+				headerJSON, _ := json.MarshalIndent(token.Header, "", "  ")
+				claimsJSON, _ := json.MarshalIndent(claims, "", "  ")
+				data.ToolSpecificData = map[string]interface{}{"Header": string(headerJSON), "Payload": string(claimsJSON)}
 			} else {
-				data.Data = JWTData{InputToken: tokenStr, Header: header, Payload: payload}
+				data.ToolSpecificData = map[string]interface{}{"Error": "Claims okunamadı."}
 			}
+		} else {
+			data.ToolSpecificData = map[string]interface{}{"Error": "Geçersiz token."}
 		}
 	}
 

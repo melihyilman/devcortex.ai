@@ -11,11 +11,16 @@ import (
 
 type PageData struct {
 	Title string
-	Tools []model.Tool
-	Data  interface{}
+	FeaturedTools []model.Tool
+	OtherTools    []model.Tool
+	ToolSpecificData interface{}
 }
 
 func Render(w http.ResponseWriter, r *http.Request, tmpl string, data *PageData) {
+	data.FeaturedTools = model.FeaturedTools
+	data.OtherTools = model.OtherTools
+	
+
 	files := []string{
 		"web/template/layout.html",
 		filepath.Join("web/template", tmpl),

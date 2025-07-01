@@ -16,8 +16,8 @@ type Base64Data struct {
 func Base64Tool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
 		Title: "Base64 Aracı",
-		Data: Base64Data{
-			Operation: "encode",
+		ToolSpecificData: map[string]interface{}{
+			"Operation": "encode",
 		},
 	}
 
@@ -35,10 +35,10 @@ func Base64Tool(w http.ResponseWriter, r *http.Request) {
 				result = string(decodedBytes)
 			}
 		}
-		pageData.Data = Base64Data{
-			InputText: inputText,
-			Operation: operation,
-			Result:    result,
+		pageData.ToolSpecificData = map[string]interface{}{
+			"InputText": inputText,
+			"Operation": operation,
+			"Result":    result,
 		}
 	}
 

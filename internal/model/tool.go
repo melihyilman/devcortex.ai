@@ -7,7 +7,28 @@ type Tool struct {
 	Icon        string // Bootstrap icon class'ı (örn: "bi bi-braces me-2")
 }
 
-var Tools = []Tool{
+var FeaturedTools = []Tool{
+	{
+		Name:        "Zaman Gezgini (Cron)",
+		Description: "Cron ifadelerini analiz edin, görselleştirin ve hatalarını ayıklayın.",
+		URL:         "/tools/cron-explorer",
+		Icon:        "bi bi-clock-history me-2",
+	},
+	{
+		Name:        "Regex Dekonstrüktörü",
+		Description: "Regex ifadelerini görselleştirin, öğrenin ve optimize edin.",
+		URL:         "/tools/regex-deconstructor",
+		Icon:        "bi bi-diagram-3 me-2",
+	},
+	{
+		Name:        "SQL Sorgu Otopsisi",
+		Description: "SQL sorgularınızın performansını analiz edin ve iyileştirin.",
+		URL:         "/tools/sql-autopsy",
+		Icon:        "bi bi-activity me-2",
+	},
+}
+
+var OtherTools = []Tool{
 	{
 		Name:        "Base64 Encoder/Decoder",
 		Description: "Metinleri Base64 formatına çevirin veya Base64 formatından çözün.",

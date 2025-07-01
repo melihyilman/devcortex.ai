@@ -1,0 +1,13 @@
+{{define "content"}}
+<div class="container">
+    <h1>Regex Dekonstrüktörü</h1>
+    <p>Regex ifadelerini görselleştirin, öğrenin ve optimize edin.</p>
+    <div class="card mt-4">
+        <div class="card-header">Regex Deseni</div>
+        <div class="card-body">
+            <p><strong>Desen:</strong> <code>{{.ToolSpecificData.RegexPattern}}</code></p>
+            <p><strong>Açıklama:</strong> {{.ToolSpecificData.Explanation}}</p>
+        </div>
+    </div>
+</div>
+{{end}}

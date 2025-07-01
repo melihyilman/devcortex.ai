@@ -18,7 +18,7 @@ type HashData struct {
 func HashTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "Hash Generator",
-		Data:  HashData{},
+		ToolSpecificData: make(map[string]interface{}),
 	}
 
 	if r.Method == http.MethodPost {
@@ -38,9 +38,9 @@ func HashTool(w http.ResponseWriter, r *http.Request) {
 		sha256Hasher.Write(inputText)
 		hashes["SHA-256"] = hex.EncodeToString(sha256Hasher.Sum(nil))
 
-		data.Data = HashData{
-			InputText: string(inputText),
-			Hashes:    hashes,
+		data.ToolSpecificData = map[string]interface{}{
+			"InputText": string(inputText),
+			"Hashes":    hashes,
 		}
 	}
 

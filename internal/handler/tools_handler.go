@@ -12,8 +12,8 @@ import (
 func Tools(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "Tüm Araçlar",
-		Tools: model.Tools,
-		Data:  nil,
+		FeaturedTools: model.FeaturedTools,
+		OtherTools:    model.OtherTools,
 	}
 	view.Render(w, r, "tools.html", data)
 }

@@ -5,15 +5,15 @@
 </div>
 <form method="POST" class="mb-4">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="markdown" rows="8" placeholder="# Başlık\n\nMarkdown içeriğini buraya girin...">{{.Data.Markdown}}</textarea>
+        <textarea class="form-control font-monospace" name="markdown" rows="8" placeholder="# Başlık\n\nMarkdown içeriğini buraya girin...">{{.ToolSpecificData.Markdown}}</textarea>
     </div>
     <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Önizle</button>
 </form>
-{{if .Data.Result}}
+{{if .ToolSpecificData.Result}}
 <div class="card">
     <div class="card-header">HTML Önizleme</div>
     <div class="card-body">
-        <div class="border p-3 bg-light" style="min-height:80px">{{.Data.Result}}</div>
+        <div class="border p-3 bg-light" style="min-height:80px">{{.ToolSpecificData.Result}}</div>
     </div>
 </div>
 {{end}}

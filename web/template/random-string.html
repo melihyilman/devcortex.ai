@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-auto">
             <label for="length" class="form-label">Uzunluk:</label>
-            <input type="number" min="4" max="64" class="form-control" id="length" name="length" value="{{if .Data.Length}}{{.Data.Length}}{{else}}16{{end}}">
+            <input type="number" min="4" max="64" class="form-control" id="length" name="length" value="{{if .ToolSpecificData.Length}}{{.ToolSpecificData.Length}}{{else}}16{{end}}">
         </div>
         <div class="col-auto">
             <label class="form-label">Karakter Seti:</label>
@@ -33,11 +33,11 @@
         </div>
     </div>
 </form>
-{{if .Data.Result}}
+{{if .ToolSpecificData.Result}}
 <div class="card">
     <div class="card-header">Oluşturulan String</div>
     <div class="card-body">
-        <input class="form-control font-monospace" readonly id="randomStringOutput" value="{{.Data.Result}}">
+        <input class="form-control font-monospace" readonly id="randomStringOutput" value="{{.ToolSpecificData.Result}}">
         <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('randomStringOutput').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
     </div>
 </div>

@@ -5,12 +5,12 @@
 </hgroup>
 <form action="/tools/hash-generator" method="POST">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="Hash'lenecek metni buraya girin...">{{.Data.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="Hash'lenecek metni buraya girin...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
 <button type="submit" class="btn btn-primary w-100"><i class="bi bi-calculator-fill me-2"></i>Hash Değerlerini Hesapla</button>
 </form>
 
-{{if .Data.Hashes}}
+{{if .ToolSpecificData.Hashes}}
 <div class="card mt-4 border-info">
     <div class="card-header">Üretilen Hash Değerleri:</div>
     <div class="card-body">
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{range $key, $value := .Data.Hashes}}
+                {{range $key, $value := .ToolSpecificData.Hashes}}
                 <tr>
                     <td><strong>{{$key}}</strong></td>
                     <td><code class="text-info font-monospace">{{$value}}</code></td>

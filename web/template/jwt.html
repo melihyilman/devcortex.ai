@@ -6,29 +6,29 @@
 
 <form action="/tools/jwt-decoder" method="POST">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="jwtToken" rows="10" placeholder="JWT Token'ı buraya yapıştırın...">{{.Data.InputToken}}</textarea>
+        <textarea class="form-control font-monospace" name="jwtToken" rows="10" placeholder="JWT Token'ı buraya yapıştırın...">{{.ToolSpecificData.InputToken}}</textarea>
     </div>
     <button type="submit" class="btn btn-primary w-100"><i class="bi bi-box-arrow-in-down me-2"></i>Decode Et</button>
 </form>
 
-{{if .Data.Error}}
-<div class="alert alert-danger mt-4"><i class="bi bi-exclamation-triangle-fill me-2"></i>{{.Data.Error}}</div>
+{{if .ToolSpecificData.Error}}
+<div class="alert alert-danger mt-4"><i class="bi bi-exclamation-triangle-fill me-2"></i>{{.ToolSpecificData.Error}}</div>
 {{end}}
 
-{{if .Data.Header}}
+{{if .ToolSpecificData.Header}}
 <div class="card mt-4 border-light">
     <div class="card-header">Header</div>
     <div class="card-body">
-        <pre><code class="text-light font-monospace">{{.Data.Header}}</code></pre>
+        <pre><code class="text-light font-monospace">{{.ToolSpecificData.Header}}</code></pre>
     </div>
 </div>
 {{end}}
 
-{{if .Data.Payload}}
+{{if .ToolSpecificData.Payload}}
 <div class="card mt-4 border-light">
     <div class="card-header">Payload</div>
     <div class="card-body">
-        <pre><code class="text-light font-monospace">{{.Data.Payload}}</code></pre>
+        <pre><code class="text-light font-monospace">{{.ToolSpecificData.Payload}}</code></pre>
     </div>
 </div>
 {{end}}

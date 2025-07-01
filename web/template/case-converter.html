@@ -5,29 +5,29 @@
 </div>
 <form method="POST" class="mb-4">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="4" placeholder="Metni buraya girin...">{{.Data.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="4" placeholder="Metni buraya girin...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
     <div class="mb-3">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="caseType" id="snake" value="snake" {{if or (eq .Data.CaseType "snake") (eq .Data.CaseType "")}}checked{{end}}>
+            <input class="form-check-input" type="radio" name="caseType" id="snake" value="snake" {{if or (eq .ToolSpecificData.CaseType "snake") (eq .ToolSpecificData.CaseType "")}}checked{{end}}>
             <label class="form-check-label" for="snake">snake_case</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="caseType" id="camel" value="camel" {{if eq .Data.CaseType "camel"}}checked{{end}}>
+            <input class="form-check-input" type="radio" name="caseType" id="camel" value="camel" {{if eq .ToolSpecificData.CaseType "camel"}}checked{{end}}>
             <label class="form-check-label" for="camel">camelCase</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="caseType" id="pascal" value="pascal" {{if eq .Data.CaseType "pascal"}}checked{{end}}>
+            <input class="form-check-input" type="radio" name="caseType" id="pascal" value="pascal" {{if eq .ToolSpecificData.CaseType "pascal"}}checked{{end}}>
             <label class="form-check-label" for="pascal">PascalCase</label>
         </div>
     </div>
     <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Dönüştür</button>
 </form>
-{{if .Data.Result}}
+{{if .ToolSpecificData.Result}}
 <div class="card">
     <div class="card-header">Sonuç</div>
     <div class="card-body">
-        <textarea class="form-control font-monospace" rows="3" readonly id="caseResult">{{.Data.Result}}</textarea>
+        <textarea class="form-control font-monospace" rows="3" readonly id="caseResult">{{.ToolSpecificData.Result}}</textarea>
         <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('caseResult').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
     </div>
 </div>

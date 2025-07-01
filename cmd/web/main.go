@@ -19,8 +19,8 @@ func main() {
 	// sadece RegisterRoutes fonksiyonunu çağırıyoruz.
 	handler.RegisterRoutes(mux)
 
-	log.Println("Sunucu başlatılıyor... http://localhost:8080 adresinden dinleniyor.")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	log.Println("Sunucu başlatılıyor... http://localhost:9090 adresinden dinleniyor.")
+	if err := http.ListenAndServe(":9090", mux); err != nil {
 		log.Fatal("Sunucu başlatılamadı:", err)
 	}
 }

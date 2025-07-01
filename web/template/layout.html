@@ -32,8 +32,8 @@
                                 <i class="bi bi-tools me-1"></i> Araçlar
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                {{range .Tools}}
-                                    <li><a class="dropdown-item" href="{{.URL}}">{{.Name}}</a></li>
+                                {{range .FeaturedTools}}
+                                    <li><a class="dropdown-item" href="{{.URL}}"><i class="{{.Icon}}"></i> {{.Name}}</a></li>
                                 {{end}}
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="/tools">Tüm Araçları Gör</a></li>

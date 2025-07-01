@@ -7,24 +7,24 @@
     <div class="row justify-content-center align-items-end">
         <div class="col-auto">
             <label for="color" class="form-label">Renk Seç:</label>
-            <input type="color" class="form-control form-control-color" id="color" name="color" value="{{if .Data.Hex}}{{.Data.Hex}}{{else}}#0099ff{{end}}">
+            <input type="color" class="form-control form-control-color" id="color" name="color" value="{{if .ToolSpecificData.Hex}}{{.ToolSpecificData.Hex}}{{else}}#0099ff{{end}}">
         </div>
         <div class="col-auto">
             <label for="hex" class="form-label">HEX:</label>
-            <input type="text" class="form-control font-monospace" id="hex" name="hex" value="{{.Data.Hex}}" placeholder="#0099ff">
+            <input type="text" class="form-control font-monospace" id="hex" name="hex" value="{{.ToolSpecificData.Hex}}" placeholder="#0099ff">
         </div>
         <div class="col-auto align-self-end">
             <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Dönüştür</button>
         </div>
     </div>
 </form>
-{{if .Data.RGB}}
+{{if .ToolSpecificData.RGB}}
 <div class="row justify-content-center mb-2">
     <div class="col-auto">
-        <span class="badge bg-primary">RGB: {{.Data.RGB}}</span>
+        <span class="badge bg-primary">RGB: {{.ToolSpecificData.RGB}}</span>
     </div>
     <div class="col-auto">
-        <span class="badge bg-success">HSL: {{.Data.HSL}}</span>
+        <span class="badge bg-success">HSL: {{.ToolSpecificData.HSL}}</span>
     </div>
 </div>
 {{end}}
