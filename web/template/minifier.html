@@ -1,27 +1,27 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-file-code me-2"></i>HTML/CSS/JS Minifier</h2>
-    <p class="lead text-body-secondary">Kodunuzu küçültün ve optimize edin.</p>
+    <p class="lead text-body-secondary">Minify and optimize your code.</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="6" placeholder="HTML, CSS veya JS kodunu buraya yapıştırın...">{{.ToolSpecificData.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="6" placeholder="Paste HTML, CSS, or JS code here...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
     <div class="mb-3">
         <select class="form-select" name="minifyType">
-            <option value="html" {{if or (eq .ToolSpecificData.MinifyType "html") (eq .ToolSpecificData.MinifyType "")}}selected{{end}}>HTML</option>
+            <option value="html" {{if or (eq .ToolSpecificData.MinifyType "html") (eq .ToolSpecificData.MinifyType "") }}selected{{end}}>HTML</option>
             <option value="css" {{if eq .ToolSpecificData.MinifyType "css"}}selected{{end}}>CSS</option>
             <option value="js" {{if eq .ToolSpecificData.MinifyType "js"}}selected{{end}}>JS</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Küçült</button>
+    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Minify</button>
 </form>
 {{if .ToolSpecificData.Result}}
 <div class="card">
-    <div class="card-header">Küçültülmüş Kod</div>
+    <div class="card-header">Minified Code</div>
     <div class="card-body">
         <textarea class="form-control font-monospace" rows="6" readonly id="minifyResult">{{.ToolSpecificData.Result}}</textarea>
-        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('minifyResult').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('minifyResult').value)"><i class="bi bi-clipboard"></i> Copy</button>
     </div>
 </div>
 {{end}}

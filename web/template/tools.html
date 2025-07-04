@@ -1,39 +1,33 @@
 {{define "content"}}
 <div class="text-center mb-5">
-    <h2><i class="bi bi-stars me-2"></i>Öne Çıkan Araçlar</h2>
-    <p class="lead text-body-secondary">Yapay zeka destekli, gelişmiş ve interaktif yeni nesil araçlarımız.</p>
+    <h2><i class="bi bi-stars me-2"></i>Featured Tools</h2>
+    <p class="lead text-body-secondary">Our next-gen tools, powered by AI, advanced and interactive.</p>
 </div>
-<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5 justify-content-center">
     {{range .FeaturedTools}}
     <div class="col">
-        <div class="card h-100 border-primary">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title text-primary"><i class="{{.Icon}}"></i> {{.Name}}</h5>
-                <p class="card-text">{{.Description}}</p>
-                <a href="{{.URL}}" class="btn btn-primary mt-auto w-100">
-                    <i class="bi bi-arrow-right-circle me-1"></i>Aracı Kullan
-                </a>
+        <a href="{{.URL}}" class="card h-100 text-center text-decoration-none">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <i class="{{.Icon}} display-4 text-primary"></i>
+                <h5 class="card-title mt-3">{{.Name}}</h5>
             </div>
-        </div>
+        </a>
     </div>
     {{end}}
 </div>
 
 <div class="text-center mb-4">
-    <h3 class="text-muted"><i class="bi bi-tools me-2"></i>Diğer Tüm Araçlar</h3>
+    <h3 class="text-muted"><i class="bi bi-tools me-2"></i>All Other Tools</h3>
 </div>
-<div class="row row-cols-1 row-cols-md-2 g-4">
+<div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
     {{range .OtherTools}}
     <div class="col">
-        <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{.Name}}</h5>
-                <p class="card-text text-body-secondary">{{.Description}}</p>
-                <a href="{{.URL}}" class="btn btn-outline-secondary mt-auto w-100">
-                    <i class="bi bi-arrow-right-circle me-1"></i>Aracı Kullan
-                </a>
+        <a href="{{.URL}}" class="card h-100 text-center text-decoration-none">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <i class="{{.Icon}} display-6"></i>
+                <h6 class="card-title mt-2">{{.Name}}</h6>
             </div>
-        </div>
+        </a>
     </div>
     {{end}}
 </div>

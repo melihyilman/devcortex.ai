@@ -20,17 +20,14 @@ func LoremIpsumTool(w http.ResponseWriter, r *http.Request) {
 		paragraphsStr := r.FormValue("paragraphs")
 		paragraphs, err := strconv.Atoi(paragraphsStr)
 		if err != nil || paragraphs <= 0 {
-			paragraphs = 3 // Varsayılan değer
+			paragraphs = 3
 		}
 		if paragraphs > 20 {
-			paragraphs = 20 // Maksimum değer
+			paragraphs = 20
 		}
 
 		var loremText []string
 		for i := 0; i < paragraphs; i++ {
-			// golorem paketi her zaman aynı metni üretiyor, bu yüzden farklı paragraflar için farklı uzunluklar kullanabiliriz.
-			// Şimdilik basit tutalım ve aynı paragrafı tekrar edelim.
-			// Daha gelişmiş bir versiyonda, her seferinde farklı metin üretmek için rastgelelik eklenebilir.
 			loremText = append(loremText, lorem.Paragraph(3, 5))
 		}
 

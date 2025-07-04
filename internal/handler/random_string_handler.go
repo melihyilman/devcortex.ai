@@ -9,7 +9,7 @@ import (
 	"devcortex.ai/internal/view"
 )
 
-const ( // Define character sets
+const (
 	lowerChars  = "abcdefghijklmnopqrstuvwxyz"
 	upperChars  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	digitChars  = "0123456789"
@@ -22,7 +22,6 @@ func RandomStringTool(w http.ResponseWriter, r *http.Request) {
 		ToolSpecificData: make(map[string]interface{}),
 	}
 
-	// Default values for initial load
 	pageData.ToolSpecificData.(map[string]interface{})["Length"] = 16
 	pageData.ToolSpecificData.(map[string]interface{})["CharsetLower"] = true
 	pageData.ToolSpecificData.(map[string]interface{})["CharsetUpper"] = true
@@ -33,7 +32,7 @@ func RandomStringTool(w http.ResponseWriter, r *http.Request) {
 		lengthStr := r.FormValue("length")
 		length, err := strconv.Atoi(lengthStr)
 		if err != nil || length < 4 || length > 64 {
-			length = 16 // Default to 16 if invalid
+			length = 16
 		}
 
 		charsets := r.Form["charset"]
@@ -56,7 +55,7 @@ func RandomStringTool(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if charset == "" {
-			charset = lowerChars + upperChars + digitChars // Default if no charset selected
+			charset = lowerChars + upperChars + digitChars
 			pageData.ToolSpecificData.(map[string]interface{})["CharsetLower"] = true
 			pageData.ToolSpecificData.(map[string]interface{})["CharsetUpper"] = true
 			pageData.ToolSpecificData.(map[string]interface{})["CharsetDigit"] = true

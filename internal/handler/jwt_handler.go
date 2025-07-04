@@ -29,7 +29,7 @@ func JWTTool(w http.ResponseWriter, r *http.Request) {
 
 		token, err := jwt.Parse(tokenString, nil)
 		if err != nil {
-			data.ToolSpecificData = map[string]interface{}{"Error": "Token parse hatası: " + err.Error()}
+			data.ToolSpecificData = map[string]interface{}{"Error": "Token parse error: " + err.Error()}
 		} else if token != nil {
 			claims, ok := token.Claims.(jwt.MapClaims)
 			if ok {
@@ -37,10 +37,10 @@ func JWTTool(w http.ResponseWriter, r *http.Request) {
 				claimsJSON, _ := json.MarshalIndent(claims, "", "  ")
 				data.ToolSpecificData = map[string]interface{}{"Header": string(headerJSON), "Payload": string(claimsJSON)}
 			} else {
-				data.ToolSpecificData = map[string]interface{}{"Error": "Claims okunamadı."}
+				data.ToolSpecificData = map[string]interface{}{"Error": "Could not read claims."}
 			}
 		} else {
-			data.ToolSpecificData = map[string]interface{}{"Error": "Geçersiz token."}
+			data.ToolSpecificData = map[string]interface{}{"Error": "Invalid token."}
 		}
 	}
 

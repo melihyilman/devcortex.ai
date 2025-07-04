@@ -1,29 +1,28 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-file-diff me-2"></i>Diff Checker</h2>
-    <p class="lead text-body-secondary">İki metin veya kod bloğu arasındaki farkları karşılaştırın.</p>
-    <p class="text-muted">(Demo sayfa)</p>
+    <p class="lead text-body-secondary">Compare differences between two text or code blocks.</p>
 </div>
 <form method="POST" action="">
     <div class="row mb-3">
         <div class="col-md-6">
-            <label for="text1" class="form-label">Metin/Kod 1</label>
+            <label for="text1" class="form-label">Text/Code 1</label>
             <textarea class="form-control" id="text1" name="text1" rows="8" required>{{with .ToolSpecificData.Text1}}{{.}}{{end}}</textarea>
         </div>
         <div class="col-md-6">
-            <label for="text2" class="form-label">Metin/Kod 2</label>
+            <label for="text2" class="form-label">Text/Code 2</label>
             <textarea class="form-control" id="text2" name="text2" rows="8" required>{{with .ToolSpecificData.Text2}}{{.}}{{end}}</textarea>
         </div>
     </div>
     <div class="text-center mb-3">
-        <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-left-right me-1"></i>Karşılaştır</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-left-right me-1"></i>Compare</button>
     </div>
 </form>
 
 {{if .ToolSpecificData.Diff}}
 <div class="card mt-4">
     <div class="card-header">
-        <i class="bi bi-list-check me-1"></i> Farklar
+        <i class="bi bi-list-check me-1"></i> Differences
     </div>
     <div class="card-body">
         <pre class="mb-0" style="white-space:pre-wrap;">{{.ToolSpecificData.Diff}}</pre>

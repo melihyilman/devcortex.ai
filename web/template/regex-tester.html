@@ -1,25 +1,25 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-slash-square me-2"></i>Regex Tester</h2>
-    <p class="lead text-body-secondary">Düzenli ifadeleri test edin ve eşleşmeleri anında görün.</p>
+    <p class="lead text-body-secondary">Test regular expressions and see matches instantly.</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="mb-3">
-        <label for="pattern" class="form-label">Regex Deseni:</label>
-        <input type="text" class="form-control font-monospace" id="pattern" name="pattern" placeholder="örn: (\w+)" value="{{.ToolSpecificData.Pattern}}" required>
+        <label for="pattern" class="form-label">Regex Pattern:</label>
+        <input type="text" class="form-control font-monospace" id="pattern" name="pattern" placeholder="e.g.: (\w+)" value="{{.ToolSpecificData.Pattern}}" required>
     </div>
     <div class="mb-3">
-        <label for="inputText" class="form-label">Test Edilecek Metin:</label>
-        <textarea class="form-control font-monospace" id="inputText" name="inputText" rows="5" placeholder="Metni buraya girin..." required>{{.ToolSpecificData.InputText}}</textarea>
+        <label for="inputText" class="form-label">Test String:</label>
+        <textarea class="form-control font-monospace" id="inputText" name="inputText" rows="5" placeholder="Enter text here..." required>{{.ToolSpecificData.InputText}}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Test Et</button>
+    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Test</button>
 </form>
 {{if .ToolSpecificData.Error}}
 <div class="alert alert-danger">{{.ToolSpecificData.Error}}</div>
 {{end}}
 {{if .ToolSpecificData.Matches}}
 <div class="card">
-    <div class="card-header">Eşleşmeler</div>
+    <div class="card-header">Matches</div>
     <div class="card-body">
         <ul class="list-group">
             {{range .ToolSpecificData.Matches}}
@@ -29,6 +29,6 @@
     </div>
 </div>
 {{else if .ToolSpecificData.Pattern}}
-<div class="alert alert-warning">Hiç eşleşme bulunamadı.</div>
+<div class="alert alert-warning">No matches found.</div>
 {{end}}
 {{end}}

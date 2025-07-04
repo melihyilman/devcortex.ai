@@ -1,11 +1,11 @@
 {{define "content"}}
 <hgroup class="text-center mb-4">
 <h2><i class="bi bi-shield-lock me-2"></i>Base64 Encoder/Decoder</h2>
-    <p class="text-body-secondary">Metinlerinizi güvenli bir şekilde Base64 formatına çevirin veya Base64 formatından çözün.</p>
+    <p class="text-body-secondary">Securely encode or decode your texts to/from Base64 format.</p>
 </hgroup>
 <form action="/tools/base64" method="POST">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="İşlenecek metni buraya girin...">{{.ToolSpecificData.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="Enter text to process...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
     <div class="mb-3 text-center">
         <div class="form-check form-check-inline">
@@ -17,12 +17,12 @@
             <label class="form-check-label" for="opDecode"><i class="bi bi-arrow-up-circle me-1"></i> Decode</label>
         </div>
     </div>
-<button type="submit" class="btn btn-primary w-100"><i class="bi bi-gear-fill me-2"></i>İşlemi Yap</button>
+<button type="submit" class="btn btn-primary w-100"><i class="bi bi-gear-fill me-2"></i>Process</button>
 </form>
 
 {{if .ToolSpecificData.Result}}
 <div class="card mt-4 border-success">
-    <div class="card-header">Sonuç:</div>
+    <div class="card-header">Result:</div>
     <div class="card-body">
         <pre><code class="text-success font-monospace">{{.ToolSpecificData.Result}}</code></pre>
     </div>

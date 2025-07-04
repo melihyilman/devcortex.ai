@@ -1,12 +1,12 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-palette me-2"></i>Color Picker / Converter</h2>
-    <p class="lead text-body-secondary">Renk kodlarını (HEX, RGB, HSL) dönüştürün ve seçin.</p>
+    <p class="lead text-body-secondary">Convert and select color codes (HEX, RGB, HSL).</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="row justify-content-center align-items-end">
         <div class="col-auto">
-            <label for="color" class="form-label">Renk Seç:</label>
+            <label for="color" class="form-label">Select Color:</label>
             <input type="color" class="form-control form-control-color" id="color" name="color" value="{{if .ToolSpecificData.Hex}}{{.ToolSpecificData.Hex}}{{else}}#0099ff{{end}}">
         </div>
         <div class="col-auto">
@@ -14,7 +14,7 @@
             <input type="text" class="form-control font-monospace" id="hex" name="hex" value="{{.ToolSpecificData.Hex}}" placeholder="#0099ff">
         </div>
         <div class="col-auto align-self-end">
-            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Dönüştür</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Convert</button>
         </div>
     </div>
 </form>

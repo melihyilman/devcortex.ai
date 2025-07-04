@@ -1,24 +1,24 @@
 {{define "content"}}
 <hgroup class="text-center mb-4">
 <h2><i class="bi bi-fingerprint me-2"></i>Hash Generator</h2>
-    <p class="text-body-secondary">Metinlerinizin MD5, SHA-1, ve SHA-256 gibi popüler kriptografik hash değerlerini anında hesaplayın.</p>
+    <p class="text-body-secondary">Instantly calculate popular cryptographic hash values like MD5, SHA-1, and SHA-256 for your texts.</p>
 </hgroup>
 <form action="/tools/hash-generator" method="POST">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="Hash'lenecek metni buraya girin...">{{.ToolSpecificData.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="10" placeholder="Enter text to hash...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
-<button type="submit" class="btn btn-primary w-100"><i class="bi bi-calculator-fill me-2"></i>Hash Değerlerini Hesapla</button>
+<button type="submit" class="btn btn-primary w-100"><i class="bi bi-calculator-fill me-2"></i>Calculate Hash Values</button>
 </form>
 
 {{if .ToolSpecificData.Hashes}}
 <div class="card mt-4 border-info">
-    <div class="card-header">Üretilen Hash Değerleri:</div>
+    <div class="card-header">Generated Hash Values:</div>
     <div class="card-body">
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Algoritma</th>
-                    <th>Hash Değeri</th>
+                    <th>Algorithm</th>
+                    <th>Hash Value</th>
                 </tr>
             </thead>
             <tbody>

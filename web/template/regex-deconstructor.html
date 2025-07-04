@@ -1,13 +1,54 @@
 {{define "content"}}
-<div class="container">
-    <h1>Regex Dekonstrüktörü</h1>
-    <p>Regex ifadelerini görselleştirin, öğrenin ve optimize edin.</p>
-    <div class="card mt-4">
-        <div class="card-header">Regex Deseni</div>
-        <div class="card-body">
-            <p><strong>Desen:</strong> <code>{{.ToolSpecificData.RegexPattern}}</code></p>
-            <p><strong>Açıklama:</strong> {{.ToolSpecificData.Explanation}}</p>
-        </div>
+<hgroup>
+    <h2>Regex Deconstructor</h2>
+    <p class="text-body-secondary">Test your Regular Expression patterns, visualize matches and groups.</p>
+</hgroup>
+
+<form action="/tools/regex-deconstructor" method="POST">
+    <div class="mb-3">
+        <label for="pattern" class="form-label">Regex Pattern</label>
+        <input type="text" class="form-control" id="pattern" name="pattern" placeholder="e.g.: (Hello) (.*)" value="{{.Data.Pattern}}">
+    </div>
+    <div class="mb-3">
+        <label for="test_string" class="form-label">Test String</label>
+        <textarea class="form-control" name="test_string" id="test_string" rows="8" placeholder="Enter the text to be tested here...">{{.Data.TestString}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Test</button>
+</form>
+
+{{if .Data.Error}}
+<div class="alert alert-danger mt-4">{{.Data.Error}}</div>
+{{else if .Data.Found}}
+<div class="card mt-4">
+    <div class="card-header">Highlighted Matches</div>
+    <div class="card-body">
+        <pre><code class="text-light">{{.Data.HighlightedText | safeHTML}}</code></pre>
     </div>
 </div>
+<div class="card mt-4">
+    <div class="card-header">Captured Groups</div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Match</th>
+                    <th>Group 1</th>
+                    <th>Group 2</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {{range $i, $match := .Data.Matches}}
+                <tr>
+                    <td>{{$i}}</td>
+                    {{range $group := $match}}
+                    <td><code>{{$group}}</code></td>
+                    {{end}}
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{end}}
 {{end}}

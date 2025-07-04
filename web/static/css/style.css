@@ -1,38 +1,29 @@
-/* ================================== */
-/* 1. ANA TEMA DEĞİŞKENLERİ           */
-/* ================================== */
 :root {
-  /* Arkaplan ve Yüzey Renkleri */
   --background-color: #11151c;
   --surface-color: #1a202c;
   --border-color: #2d3748;
 
-  /* Metin Renkleri */
   --text-color: #e2e8f0;
   --text-secondary-color: #a0aec0;
 
-  /* YENİ VURGU RENGİ: MODERN VIOLET */
-  --bs-primary: #7C3AED;
-  --bs-primary-rgb: 124, 58, 237;
+  --bs-primary: #5a3de0;
+  --bs-primary-rgb: 90, 61, 224;
   --bs-btn-color: #ffffff;
 
-  --bs-link-color-rgb: 124, 58, 237;
-  --bs-link-hover-color-rgb: 168, 85, 247;
+  --bs-link-color-rgb: 90, 61, 224;
+  --bs-link-hover-color-rgb: 124, 58, 237;
 
-  /* UYARI RENKLERİ */
   --custom-alert-danger-bg: rgba(220, 53, 69, 0.15);
   --custom-alert-danger-border: rgba(220, 53, 69, 0.3);
   --custom-alert-danger-text: #f8d7da;
 }
 
-/* ================================== */
-/* 2. GLOBAL STİL AYARLARI            */
-/* ================================== */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
   font-family: 'Inter', 'Segoe UI', sans-serif;
 }
+
 .text-body-secondary {
   color: var(--text-secondary-color) !important;
 }
@@ -41,16 +32,26 @@ a {
   color: rgb(var(--bs-link-color-rgb));
   text-decoration: none;
 }
+
 a:hover {
   color: rgb(var(--bs-link-hover-color-rgb));
   text-decoration: underline;
 }
 
-/* ================================== */
-/* 3. BİLEŞENLERİ ÖZELLEŞTİRME        */
-/* ================================== */
+.navbar {
+    background-color: rgba(26, 32, 44, 0.4); /* Increased transparency */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07); /* Subtle border for definition */
+}
 
-/* Primary Butonlar */
+div a + span {
+    color: var(--text-secondary-color);
+}
+
+.card-title.text-primary {
+    color: #c8d0d8 !important;
+}
+
 .btn-primary {
   background-color: var(--bs-primary) !important;
   background-image: none !important;
@@ -61,41 +62,52 @@ a:hover {
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 10px rgba(var(--bs-primary-rgb), 0.6);
-  filter: brightness(1.15);
-  transform: scale(1.02);
+  box-shadow: 0 0 3px rgba(var(--bs-primary-rgb), 0.2);
+  filter: none;
+  transform: scale(1.005);
 }
 
-/* Araç Kartları */
 .card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(var(--bs-primary-rgb), 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(var(--bs-primary-rgb), 0.1);
 }
 
-
-/* Uyarı Kutuları */
 .alert {
   border-radius: var(--bs-border-radius) !important;
   border-width: 1px;
 }
+
 .alert-danger {
   color: var(--custom-alert-danger-text) !important;
   background-color: var(--custom-alert-danger-bg) !important;
   border-color: var(--custom-alert-danger-border) !important;
 }
 
-/* Form Elemanları */
+.alert-success {
+  color: #d4edda !important;
+  background-color: #28a745 !important;
+  border-color: #218838 !important;
+  box-shadow: none !important;
+}
+
 .form-control {
   background-color: var(--surface-color);
   color: var(--text-color);
   border: 1px solid var(--border-color);
   font-family: 'Fira Code', monospace;
   font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+.form-control.form-control-sm {
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
 .form-control:focus {
   background-color: var(--surface-color);
   color: var(--text-color);
@@ -103,7 +115,6 @@ a:hover {
   box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25) !important;
 }
 
-/* Navigasyon Barı Hizalama */
 nav ul li > a,
 nav ul li > details {
   height: 100%;
@@ -111,7 +122,6 @@ nav ul li > details {
   align-items: center;
 }
 
-/* Font-monospace sınıfı */
 .font-monospace {
     font-family: 'Fira Code', monospace !important;
 }
