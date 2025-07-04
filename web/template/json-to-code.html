@@ -1,0 +1,71 @@
+{{ define "title" }}JSON to Code{{ end }}
+{{ define "content" }}
+<div class="container mt-5">
+    <h2 class="mb-4">JSON to Code</h2>
+    <div class="row d-flex align-items-center">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="jsonInput">JSON Input:</label>
+                <textarea class="form-control" id="jsonInput" rows="22" placeholder="Enter JSON here..."></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 text-center">
+            <div class="form-group mb-3">
+                <label for="languageSelect"><small>Select Language:</small></label>
+                <select class="form-control form-control-sm" id="languageSelect">
+                    <option value="csharp">C#</option>
+                    <option value="go">Go</option>
+                    <option value="typescript">TypeScript</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" id="generateCode"><i class="bi bi-code me-2"></i> Generate Code</button>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="codeOutput">Generated Code:</label>
+                <textarea class="form-control" id="codeOutput" rows="22" readonly></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div id="validationMessage"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('generateCode').addEventListener('click', async function() {
+    const jsonInput = document.getElementById('jsonInput').value;
+    const language = document.getElementById('languageSelect').value;
+    const validationMessage = document.getElementById('validationMessage');
+    const codeOutput = document.getElementById('codeOutput');
+
+    validationMessage.innerHTML = '';
+    codeOutput.value = '';
+
+    try {
+        JSON.parse(jsonInput);
+
+        const response = await fetch('/tools/json-to-code', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ json: jsonInput, language: language }),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            codeOutput.value = result.code;
+            validationMessage.innerHTML = `<div class="alert alert-success" role="alert">Code generated successfully!</div>`;
+        } else {
+            validationMessage.innerHTML = `<div class="alert alert-danger" role="alert">Error: ${result.error}</div>`;
+        }
+    } catch (e) {
+        validationMessage.innerHTML = `<div class="alert alert-danger" role="alert">Invalid JSON input: ${e.message}</div>`;
+    }
+});
+</script>
+{{ end }}

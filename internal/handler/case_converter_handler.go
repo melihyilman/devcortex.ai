@@ -14,7 +14,6 @@ func CaseConverterTool(w http.ResponseWriter, r *http.Request) {
 		ToolSpecificData: make(map[string]interface{}),
 	}
 
-	// Default case type for initial load
 	pageData.ToolSpecificData.(map[string]interface{})["CaseType"] = "snake"
 
 	if r.Method == http.MethodPost {

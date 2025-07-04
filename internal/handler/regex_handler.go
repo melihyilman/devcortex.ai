@@ -1,33 +1,42 @@
 package handler
 
 import (
+	"html/template"
 	"net/http"
-	"regexp"
 
+	"devcortex.ai/internal/tool"
 	"devcortex.ai/internal/view"
 )
 
+type RegexData struct {
+	Pattern         string
+	TestString      string
+	HighlightedText template.HTML
+	Matches         [][]string
+	Error           string
+}
+
 func RegexTool(w http.ResponseWriter, r *http.Request) {
-	data := &view.PageData{
-		Title: "Regex Tester",
-		ToolSpecificData: make(map[string]interface{}),
-	}
+	data := RegexData{}
+	regexService := tool.NewRegexTester()
 
 	if r.Method == http.MethodPost {
 		pattern := r.FormValue("pattern")
-		inputText := r.FormValue("inputText")
+		testString := r.FormValue("test_string")
+		data.Pattern = pattern
+		data.TestString = testString
 
-		data.ToolSpecificData.(map[string]interface{})["Pattern"] = pattern
-		data.ToolSpecificData.(map[string]interface{})["InputText"] = inputText
-
-		re, err := regexp.Compile(pattern)
+		result, err := regexService.Test(pattern, testString)
 		if err != nil {
-			data.ToolSpecificData.(map[string]interface{})["Error"] = "Invalid regex pattern: " + err.Error()
+			data.Error = err.Error()
 		} else {
-			matches := re.FindAllString(inputText, -1)
-			data.ToolSpecificData.(map[string]interface{})["Matches"] = matches
+			data.HighlightedText = result.HighlightedText
+			data.Matches = result.Matches
 		}
 	}
 
-	view.Render(w, r, "regex-tester.html", data)
+	view.Render(w, r, "regex.html", &view.PageData{
+		Title:            "Regex Deconstructor",
+		ToolSpecificData: data,
+	})
 }

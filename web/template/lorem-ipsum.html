@@ -1,25 +1,25 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-file-earmark-text me-2"></i>Lorem Ipsum Generator</h2>
-    <p class="lead text-body-secondary">Hızlıca sahte metin (lorem ipsum) oluşturun.</p>
+    <p class="lead text-body-secondary">Quickly generate placeholder text (lorem ipsum).</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="row justify-content-center">
         <div class="col-auto">
-            <label for="paragraphs" class="form-label">Paragraf Sayısı:</label>
+            <label for="paragraphs" class="form-label">Number of Paragraphs:</label>
             <input type="number" min="1" max="20" class="form-control" id="paragraphs" name="paragraphs" value="{{if .ToolSpecificData.Paragraphs}}{{.ToolSpecificData.Paragraphs}}{{else}}3{{end}}">
         </div>
         <div class="col-auto align-self-end">
-            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Oluştur</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Generate</button>
         </div>
     </div>
 </form>
 {{if .ToolSpecificData.Lorem}}
 <div class="card">
-    <div class="card-header">Oluşturulan Lorem Ipsum</div>
+    <div class="card-header">Generated Lorem Ipsum</div>
     <div class="card-body">
         <textarea class="form-control font-monospace" rows="8" readonly id="loremOutput">{{.ToolSpecificData.Lorem}}</textarea>
-        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('loremOutput').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('loremOutput').value)"><i class="bi bi-clipboard"></i> Copy</button>
     </div>
 </div>
 {{end}}

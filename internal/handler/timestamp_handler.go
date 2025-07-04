@@ -18,7 +18,7 @@ type TimestampData struct {
 
 func TimestampTool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
-		Title: "Unix Timestamp Dönüştürücü",
+		Title: "Unix Timestamp Converter",
 		ToolSpecificData:  map[string]interface{}{},
 	}
 
@@ -31,7 +31,7 @@ func TimestampTool(w http.ResponseWriter, r *http.Request) {
 			data["TimestampInput"] = tsStr
 			ts, err := strconv.ParseInt(tsStr, 10, 64)
 			if err != nil {
-				data["Error"] = "Lütfen geçerli bir sayısal zaman damgası girin."
+				data["Error"] = "Please enter a valid numeric timestamp."
 			} else {
 				t := time.Unix(ts, 0)
 				data["ReadableDate"] = t.Format("02-01-2006 15:04:05")
@@ -42,7 +42,7 @@ func TimestampTool(w http.ResponseWriter, r *http.Request) {
 			const layout = "2006-01-02 15:04:05"
 			t, err := time.Parse(layout, dateStr)
 			if err != nil {
-				data["Error"] = "Lütfen 'YYYY-AA-GG SS:DD:ss' formatında geçerli bir tarih girin."
+				data["Error"] = "Please enter a valid date in 'YYYY-MM-DD HH:MM:SS' format."
 			} else {
 				data["TimestampResult"] = t.Unix()
 			}

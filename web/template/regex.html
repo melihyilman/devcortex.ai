@@ -1,0 +1,78 @@
+{{define "content"}}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Regex Deconstructor</h1>
+                    <p class="card-text text-center text-muted mb-4">Test your regex patterns, see matches and capture groups instantly.</p>
+
+                    <form action="/tools/regex-deconstructor" method="POST">
+                        <div class="mb-3">
+                            <label for="pattern" class="form-label">Regex Pattern</label>
+                            <input type="text" class="form-control" id="pattern" name="pattern" placeholder="e.g.: (\w+)" value="{{.ToolSpecificData.Pattern}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="test_string" class="form-label">Test String</label>
+                            <textarea class="form-control" id="test_string" name="test_string" rows="6">{{.ToolSpecificData.TestString}}</textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Test</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{if .ToolSpecificData.Error}}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-danger" role="alert">
+                <strong>Error:</strong> {{.ToolSpecificData.Error}}
+            </div>
+        </div>
+    </div>
+    {{end}}
+
+    {{if .ToolSpecificData.Matches}}
+    <div class="row mt-4">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="card h-100">
+                <div class="card-header">Highlighted Matches</div>
+                <div class="card-body">
+                    <p style="white-space: pre-wrap;">{{.ToolSpecificData.HighlightedText}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header">Captured Groups</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Full Match</th>
+                                    {{range $i, $group := (index .ToolSpecificData.Matches 0)}} 
+                                        {{if gt $i 0}}<th>Group {{$i}}</th>{{end}}
+                                    {{end}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{range .ToolSpecificData.Matches}}
+                                <tr>
+                                    {{range .}}<td>{{.}}</td>{{end}}
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{end}}
+</div>
+{{end}}

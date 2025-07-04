@@ -39,7 +39,6 @@ func MinifierTool(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if err != nil {
-			// Hata yönetimi eklenebilir, şimdilik basit tutuyoruz.
 			pageData.ToolSpecificData.(map[string]interface{})["Result"] = "Error: " + err.Error()
 		} else {
 			pageData.ToolSpecificData.(map[string]interface{})["Result"] = resultBuffer.String()

@@ -1,14 +1,33 @@
 {{define "content"}}
-<div class="text-center">
-<h1 class="display-4">
-    <i class="bi bi-cpu-fill me-2"></i>devcortex.ai
-</h1>
+<div class="text-center pt-5 pb-5">
+    <h1 class="display-4">
+        <i class="bi bi-cpu-fill me-2"></i>devcortex.ai
+    </h1>
     <p class="lead text-body-secondary">
-        Yapay zeka destekli, modern ve etkili geliştirici araçları koleksiyonu.
+        A collection of modern and effective developer tools powered by AI.
     </p>
-    <p>Verimliliğinizi artırmak için tasarlanmış araçlarımızı keşfedin!</p>
-    <a href="/tools" class="btn btn-primary btn-lg mt-3">
-        <i class="bi bi-lightning-charge-fill me-2"></i>Tüm Araçları Keşfet
+</div>
+
+<div class="text-center mb-5">
+    <h2><i class="bi bi-stars me-2"></i>Featured Tools</h2>
+    <p class="lead text-body-secondary">Our next-gen tools, powered by AI, advanced and interactive.</p>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5 justify-content-center">
+    {{range .FeaturedTools}}
+    <div class="col">
+        <a href="{{.URL}}" class="card h-100 text-center text-decoration-none">
+            <div class="card-body d-flex flex-column justify-content-center">
+                <i class="{{.Icon}} display-4 text-primary"></i>
+                <h5 class="card-title mt-3">{{.Name}}</h5>
+            </div>
+        </a>
+    </div>
+    {{end}}
+</div>
+
+<div class="text-center mt-5">
+    <a href="/tools" class="btn btn-outline-primary btn-lg">
+        <i class="bi bi-tools me-2"></i>Explore All Tools
     </a>
 </div>
 {{end}}

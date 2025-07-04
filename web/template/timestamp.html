@@ -1,38 +1,38 @@
 {{define "content"}}
 <hgroup class="text-center mb-4">
-<h2><i class="bi bi-clock-history me-2"></i>Unix Zaman Damgası Dönüştürücü</h2>
-    <p class="text-body-secondary">Unix zaman damgasını (timestamp) okunabilir bir tarihe veya tam tersine kolayca çevirin.</p>
+<h2><i class="bi bi-clock-history me-2"></i>Unix Timestamp Converter</h2>
+    <p class="text-body-secondary">Easily convert Unix timestamp to a readable date and vice versa.</p>
 </hgroup>
 
 <div class="row">
     <div class="col-md-6">
         <div class="card h-100">
-            <div class="card-header">Timestamp → Okunabilir Tarih</div>
+            <div class="card-header">Timestamp → Readable Date</div>
             <div class="card-body">
                 <form action="/tools/timestamp-converter" method="POST">
                     <div class="mb-3">
-                        <input type="number" class="form-control font-monospace" name="timestamp" placeholder="örn: 1719562257" value="{{.ToolSpecificData.TimestampInput}}">
+                        <input type="number" class="form-control font-monospace" name="timestamp" placeholder="e.g.: 1719562257" value="{{.ToolSpecificData.TimestampInput}}">
                     </div>
-<button type="submit" class="btn btn-primary w-100" name="action" value="to_date"><i class="bi bi-arrow-right-circle me-2"></i>Dönüştür</button>
+<button type="submit" class="btn btn-primary w-100" name="action" value="to_date"><i class="bi bi-arrow-right-circle me-2"></i>Convert</button>
                 </form>
                 {{if .ToolSpecificData.ReadableDate}}
-                <p class="mt-3"><strong>Sonuç:</strong> <code class="text-success font-monospace">{{.ToolSpecificData.ReadableDate}}</code></p>
+                <p class="mt-3"><strong>Result:</strong> <code class="text-success font-monospace">{{.ToolSpecificData.ReadableDate}}</code></p>
                 {{end}}
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card h-100">
-            <div class="card-header">Okunabilir Tarih → Timestamp</div>
+            <div class="card-header">Readable Date → Timestamp</div>
             <div class="card-body">
                 <form action="/tools/timestamp-converter" method="POST">
                     <div class="mb-3">
-                        <input type="text" class="form-control font-monospace" name="date_string" placeholder="örn: 2025-06-28 11:10:57" value="{{.ToolSpecificData.DateStringInput}}">
+                        <input type="text" class="form-control font-monospace" name="date_string" placeholder="e.g.: 2025-06-28 11:10:57" value="{{.ToolSpecificData.DateStringInput}}">
                     </div>
-<button type="submit" class="btn btn-primary w-100" name="action" value="to_timestamp"><i class="bi bi-arrow-left-circle me-2"></i>Dönüştür</button>
+<button type="submit" class="btn btn-primary w-100" name="action" value="to_timestamp"><i class="bi bi-arrow-left-circle me-2"></i>Convert</button>
                 </form>
                 {{if .ToolSpecificData.TimestampResult}}
-                <p class="mt-3"><strong>Sonuç:</strong> <code class="text-success font-monospace">{{.ToolSpecificData.TimestampResult}}</code></p>
+                <p class="mt-3"><strong>Result:</strong> <code class="text-success font-monospace">{{.ToolSpecificData.TimestampResult}}</code></p>
                 {{end}}
             </div>
         </div>

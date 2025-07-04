@@ -13,7 +13,6 @@ func URLEncoderTool(w http.ResponseWriter, r *http.Request) {
 		ToolSpecificData: make(map[string]interface{}),
 	}
 
-	// Default operation for initial load
 	pageData.ToolSpecificData.(map[string]interface{})["Operation"] = "encode"
 
 	if r.Method == http.MethodPost {

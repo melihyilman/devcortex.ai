@@ -8,7 +8,7 @@ import (
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
-		Title: "Ana Sayfa",
+		Title: "Home Page",
 	}
 	view.Render(w, r, "home.html", data)
 }

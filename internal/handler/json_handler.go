@@ -1,10 +1,9 @@
 package handler
 
 import (
-	"bytes"
-	"encoding/json"
 	"net/http"
 
+	"devcortex.ai/internal/tool"
 	"devcortex.ai/internal/view"
 )
 
@@ -12,40 +11,30 @@ type JSONData struct {
 	InputJSON string
 	Result    string
 	IsValid   bool
+	Error     string
 }
 
 func JSONTool(w http.ResponseWriter, r *http.Request) {
-	pageData := &view.PageData{
-		Title: "JSON Validator & Formatter",
-		ToolSpecificData: nil,
-	}
+	data := JSONData{}
+	jsonService := tool.NewJSONFormatter()
 
 	if r.Method == http.MethodPost {
 		inputJSON := r.FormValue("jsonInput")
-		var result string
-		isValid := false
+		data.InputJSON = inputJSON
 
-		var js interface{}
-		if err := json.Unmarshal([]byte(inputJSON), &js); err != nil {
-			result = "JSON Parse Hatası: " + err.Error()
-			isValid = false
+		formatted, isValid, err := jsonService.Format(inputJSON)
+		if err != nil {
+			data.Error = err.Error()
+			data.IsValid = false
+			data.Result = inputJSON // Show the original input on error
 		} else {
-			var prettyJSON bytes.Buffer
-			if err := json.Indent(&prettyJSON, []byte(inputJSON), "", "  "); err != nil {
-				result = "JSON Formatlama Hatası: " + err.Error()
-				isValid = false
-			} else {
-				result = prettyJSON.String()
-				isValid = true
-			}
-		}
-
-		pageData.ToolSpecificData = map[string]interface{}{
-			"InputJSON": inputJSON,
-			"Result":    result,
-			"IsValid":   isValid,
+			data.Result = formatted
+			data.IsValid = isValid
 		}
 	}
 
-	view.Render(w, r, "json.html", pageData)
+	view.Render(w, r, "json.html", &view.PageData{
+		Title:            "JSON Validator & Formatter",
+		ToolSpecificData: data,
+	})
 }

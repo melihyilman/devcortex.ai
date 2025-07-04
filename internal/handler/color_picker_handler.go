@@ -24,7 +24,6 @@ func ColorPickerTool(w http.ResponseWriter, r *http.Request) {
 			color = hex
 		}
 
-		// Remove # if present
 		color = strings.TrimPrefix(color, "#")
 
 		if len(color) == 6 {

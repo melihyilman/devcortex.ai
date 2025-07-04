@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="tr" data-bs-theme="dark">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{.Title}} - devcortex.ai</title>
+    <title>devcortex.ai - Smart Tools for Developers</title>
+    <meta name="description" content="AI-powered, fast, and free developer tools for JSON, JWT, Base64, Hash, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://devcortex.ai/">
+    <meta property="og:title" content="devcortex.ai - Smart Tools for Developers">
+    <meta property="og:description" content="Fast and free developer tools for JSON, JWT, Base64, Hash, and more.">
     
-    <!-- Bootswatch Vapor Theme -->
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/vapor/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
@@ -25,18 +27,18 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/"><i class="bi bi-house-door-fill me-1"></i> Ana Sayfa</a>
+                            <a class="nav-link" href="/"><i class="bi bi-house-door-fill me-1"></i> Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-tools me-1"></i> Araçlar
+                                <i class="bi bi-tools me-1"></i> Tools
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{range .FeaturedTools}}
                                     <li><a class="dropdown-item" href="{{.URL}}"><i class="{{.Icon}}"></i> {{.Name}}</a></li>
                                 {{end}}
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/tools">Tüm Araçları Gör</a></li>
+                                <li><a class="dropdown-item" href="/tools">See All Tools</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -49,7 +51,7 @@
         </main>
 
         <footer class="text-center text-muted mt-5 py-3 border-top">
-            <p>&copy; 2025 devcortex.ai ・ Yapay zeka destekli geliştirici araçları.</p>
+            <p>&copy; 2025 devcortex.ai ・ AI-powered developer tools.</p>
         </footer>
     </div>
 

@@ -15,7 +15,7 @@ type Base64Data struct {
 
 func Base64Tool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
-		Title: "Base64 Aracı",
+		Title: "Base64 Tool",
 		ToolSpecificData: map[string]interface{}{
 			"Operation": "encode",
 		},
@@ -30,7 +30,7 @@ func Base64Tool(w http.ResponseWriter, r *http.Request) {
 		} else {
 			decodedBytes, err := base64.StdEncoding.DecodeString(inputText)
 			if err != nil {
-				result = "Hata: Geçersiz Base64 metni!"
+				result = "Error: Invalid Base64 text!"
 			} else {
 				result = string(decodedBytes)
 			}

@@ -1,44 +1,44 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-shuffle me-2"></i>Random String Generator</h2>
-    <p class="lead text-body-secondary">Güvenli rastgele stringler oluşturun.</p>
+    <p class="lead text-body-secondary">Generate secure random strings.</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="row justify-content-center">
         <div class="col-auto">
-            <label for="length" class="form-label">Uzunluk:</label>
+            <label for="length" class="form-label">Length:</label>
             <input type="number" min="4" max="64" class="form-control" id="length" name="length" value="{{if .ToolSpecificData.Length}}{{.ToolSpecificData.Length}}{{else}}16{{end}}">
         </div>
         <div class="col-auto">
-            <label class="form-label">Karakter Seti:</label>
+            <label class="form-label">Character Set:</label>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="charset" value="lower" id="lower" checked>
-                <label class="form-check-label" for="lower">Küçük Harf</label>
+                <label class="form-check-label" for="lower">Lowercase</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="charset" value="upper" id="upper" checked>
-                <label class="form-check-label" for="upper">Büyük Harf</label>
+                <label class="form-check-label" for="upper">Uppercase</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="charset" value="digit" id="digit" checked>
-                <label class="form-check-label" for="digit">Rakam</label>
+                <label class="form-check-label" for="digit">Digits</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="charset" value="symbol" id="symbol">
-                <label class="form-check-label" for="symbol">Sembol</label>
+                <label class="form-check-label" for="symbol">Symbols</label>
             </div>
         </div>
         <div class="col-auto align-self-end">
-            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Oluştur</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-lightning-charge me-1"></i>Generate</button>
         </div>
     </div>
 </form>
 {{if .ToolSpecificData.Result}}
 <div class="card">
-    <div class="card-header">Oluşturulan String</div>
+    <div class="card-header">Generated String</div>
     <div class="card-body">
         <input class="form-control font-monospace" readonly id="randomStringOutput" value="{{.ToolSpecificData.Result}}">
-        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('randomStringOutput').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('randomStringOutput').value)"><i class="bi bi-clipboard"></i> Copy</button>
     </div>
 </div>
 {{end}}

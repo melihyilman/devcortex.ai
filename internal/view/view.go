@@ -10,16 +10,15 @@ import (
 )
 
 type PageData struct {
-	Title string
-	FeaturedTools []model.Tool
-	OtherTools    []model.Tool
+	Title            string
+	FeaturedTools    []model.Tool
+	OtherTools       []model.Tool
 	ToolSpecificData interface{}
 }
 
 func Render(w http.ResponseWriter, r *http.Request, tmpl string, data *PageData) {
 	data.FeaturedTools = model.FeaturedTools
 	data.OtherTools = model.OtherTools
-	
 
 	files := []string{
 		"web/template/layout.html",
@@ -28,15 +27,15 @@ func Render(w http.ResponseWriter, r *http.Request, tmpl string, data *PageData)
 
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		log.Printf("Şablon parse hatası: %v", err)
+		log.Printf("Template parsing error: %v", err)
 		http.Error(w, "Internal Server Error", 500)
-		return // Hata sonrası fonksiyonu sonlandır
+		return
 	}
 
 	err = ts.Execute(w, data)
 	if err != nil {
-		log.Printf("Şablon execute hatası: %v", err)
+		log.Printf("Template execution error: %v", err)
 		http.Error(w, "Internal Server Error", 500)
-		return // Hata sonrası fonksiyonu sonlandır
+		return
 	}
 }

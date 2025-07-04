@@ -1,17 +1,17 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-markdown me-2"></i>Markdown Previewer</h2>
-    <p class="lead text-body-secondary">Markdown dosyalarınızı anında önizleyin.</p>
+    <p class="lead text-body-secondary">Instantly preview your Markdown files.</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="markdown" rows="8" placeholder="# Başlık\n\nMarkdown içeriğini buraya girin...">{{.ToolSpecificData.Markdown}}</textarea>
+        <textarea class="form-control font-monospace" name="markdown" rows="8" placeholder="# Title\n\nEnter markdown content here...">{{.ToolSpecificData.Markdown}}</textarea>
     </div>
-    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Önizle</button>
+    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Preview</button>
 </form>
 {{if .ToolSpecificData.Result}}
 <div class="card">
-    <div class="card-header">HTML Önizleme</div>
+    <div class="card-header">HTML Preview</div>
     <div class="card-body">
         <div class="border p-3 bg-light" style="min-height:80px">{{.ToolSpecificData.Result}}</div>
     </div>

@@ -1,11 +1,11 @@
 {{define "content"}}
 <div class="text-center mb-4">
     <h2><i class="bi bi-textarea me-2"></i>Case Converter</h2>
-    <p class="lead text-body-secondary">Metinlerinizi snake_case, camelCase, PascalCase gibi formatlara dönüştürün.</p>
+    <p class="lead text-body-secondary">Convert your texts to formats like snake_case, camelCase, PascalCase.</p>
 </div>
 <form method="POST" class="mb-4">
     <div class="mb-3">
-        <textarea class="form-control font-monospace" name="inputText" rows="4" placeholder="Metni buraya girin...">{{.ToolSpecificData.InputText}}</textarea>
+        <textarea class="form-control font-monospace" name="inputText" rows="4" placeholder="Enter text here...">{{.ToolSpecificData.InputText}}</textarea>
     </div>
     <div class="mb-3">
         <div class="form-check form-check-inline">
@@ -21,14 +21,14 @@
             <label class="form-check-label" for="pascal">PascalCase</label>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Dönüştür</button>
+    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-lightning-charge me-1"></i>Convert</button>
 </form>
 {{if .ToolSpecificData.Result}}
 <div class="card">
-    <div class="card-header">Sonuç</div>
+    <div class="card-header">Result</div>
     <div class="card-body">
         <textarea class="form-control font-monospace" rows="3" readonly id="caseResult">{{.ToolSpecificData.Result}}</textarea>
-        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('caseResult').value)"><i class="bi bi-clipboard"></i> Kopyala</button>
+        <button class="btn btn-outline-secondary mt-2 w-100" type="button" onclick="navigator.clipboard.writeText(document.getElementById('caseResult').value)"><i class="bi bi-clipboard"></i> Copy</button>
     </div>
 </div>
 {{end}}
