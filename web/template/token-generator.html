@@ -1,0 +1,46 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-key fs-2 me-3"></i>
+                <h1 class="display-5">Token Generator</h1>
+            </div>
+            <p class="lead mb-4">Generate a cryptographically secure random token.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/token-generator" method="post">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Generate Token</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .GeneratedToken}}
+                        <div class="mt-4">
+                            <label for="generatedToken" class="form-label">Generated Token</label>
+                            <div class="input-group">
+                                <input type="text" id="generatedToken" class="form-control bg-dark text-light border-secondary" value="{{.GeneratedToken}}" readonly>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('generatedToken')">Copy</button>
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
+}
+</script>
+{{end}}

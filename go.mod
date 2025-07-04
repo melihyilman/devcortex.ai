@@ -9,10 +9,12 @@ require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/sergi/go-diff v1.4.0
 	github.com/tdewolff/minify/v2 v2.23.8
+	github.com/xwb1989/sqlparser v0.0.0-20180606152119-120387863bf2
 	github.com/yuin/goldmark v1.7.12
 )
 
 require (
-	github.com/stretchr/testify v1.8.1 // indirect
+	github.com/stretchr/testify v1.10.0 // indirect
 	github.com/tdewolff/parse/v2 v2.8.1 // indirect
+	golang.org/x/crypto v0.39.0 // indirect
 )

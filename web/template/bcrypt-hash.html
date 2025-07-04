@@ -1,0 +1,59 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-shield-lock fs-2 me-3"></i>
+                <h1 class="display-5">Bcrypt Hash & Compare</h1>
+            </div>
+            <p class="lead mb-4">Hash text using Bcrypt or compare a plain text with a Bcrypt hash.</p>
+
+            <!-- Hash Form -->
+            <div class="card bg-dark text-light border-secondary mb-4">
+                <div class="card-header">Hash Text</div>
+                <div class="card-body">
+                    <form action="/tools/bcrypt-hash" method="post">
+                        <input type="hidden" name="action" value="hash">
+                        <div class="mb-3">
+                            <label for="text_to_hash" class="form-label">Text to Hash</label>
+                            <input type="text" id="text_to_hash" name="text_to_hash" class="form-control bg-dark text-light border-secondary" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Hash</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Compare Form -->
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-header">Compare Text and Hash</div>
+                <div class="card-body">
+                    <form action="/tools/bcrypt-hash" method="post">
+                        <input type="hidden" name="action" value="compare">
+                        <div class="mb-3">
+                            <label for="text_to_compare" class="form-label">Plain Text</label>
+                            <input type="text" id="text_to_compare" name="text_to_compare" class="form-control bg-dark text-light border-secondary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hash_to_compare" class="form-label">Bcrypt Hash</label>
+                            <input type="text" id="hash_to_compare" name="hash_to_compare" class="form-control bg-dark text-light border-secondary" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Compare</button>
+                    </form>
+                </div>
+            </div>
+
+            {{with .ToolSpecificData}}
+                {{if .Result}}
+                <div class="mt-4">
+                    <div class="alert {{if .Success}}alert-success{{else}}alert-danger{{end}}" role="alert">
+                        {{.Result}}
+                    </div>
+                </div>
+                {{end}}
+            {{end}}
+        </div>
+    </div>
+</div>
+{{end}}
