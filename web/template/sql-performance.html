@@ -1,0 +1,86 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="d-flex align-items-center mb-4">
+        <i class="bi bi-activity fs-2 me-3"></i>
+        <h1 class="display-5">{{.Title}}</h1>
+    </div>
+    <p class="lead mb-4">Enter your SQL query to get a sample execution plan and performance recommendations. <br><small class="text-muted">Note: This is a demonstration and does not connect to a real database.</small></p>
+
+    <div class="card bg-dark text-light border-secondary">
+        <div class="card-body">
+            <form action="/tools/sql-performance" method="post">
+                <div class="mb-3">
+                    <label for="sql_query" class="form-label">SQL Query</label>
+                    <textarea id="sql_query" name="sql_query" rows="10" class="form-control bg-dark text-light border-secondary" placeholder="Enter your SQL query here...">{{with .ToolSpecificData}}{{.SQLQuery}}{{end}}</textarea>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-primary" type="submit">Analyze</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{with .ToolSpecificData}}
+    <div class="row mt-4 gx-5">
+        {{if .PerformanceRecommendations}}
+        <div class="col-lg-6">
+            <h2 class="h4 mb-3">Performance Recommendations</h2>
+            {{range .PerformanceRecommendations}}
+                {{$borderColor := "border-info"}}
+                {{$titleColor := "text-info"}}
+                {{if eq .Severity "Critical"}}
+                    {{$borderColor = "border-danger"}}
+                    {{$titleColor = "text-danger"}}
+                {{else if eq .Severity "Warning"}}
+                    {{$borderColor = "border-warning"}}
+                    {{$titleColor = "text-warning"}}
+                {{else if eq .Severity "Success"}}
+                    {{$borderColor = "border-success"}}
+                    {{$titleColor = "text-success"}}
+                {{end}}
+            <div class="card bg-dark border-start border-4 {{$borderColor}} mb-3">
+                <div class="card-body">
+                    <h5 class="card-title {{$titleColor}}">{{.Title}}</h5>
+                    <p class="card-text text-light">{{.Detail}}</p>
+                </div>
+            </div>
+            {{end}}
+        </div>
+        {{end}}
+
+        {{if .ASTGraph}}
+        <div class="col-lg-6">
+            <div class="card bg-dark text-light border-secondary h-100">
+                <div class="card-header">
+                    Query Structure (AST)
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <div id="graph-container" class="w-100 h-100"></div>
+                    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/viz.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var dot = `{{.ASTGraph}}`;
+                            var viz = new Viz();
+                            viz.renderSVGElement(dot)
+                                .then(function(element) {
+                                    element.setAttribute('width', '100%');
+                                    element.setAttribute('height', '100%');
+                                    document.getElementById('graph-container').appendChild(element);
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+
+</div>
+{{end}}

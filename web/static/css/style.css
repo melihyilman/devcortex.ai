@@ -38,10 +38,13 @@ a:hover {
   text-decoration: underline;
 }
 
-.navbar {
-    background-color: rgba(26, 32, 44, 0.4); /* Increased transparency */
+.navbar-custom {
+    background-color: rgba(26, 32, 44, 0.6); /* Slightly less transparent */
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07); /* Subtle border for definition */
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1.5rem; /* Pill shape */
+    padding: 0.8rem 1.5rem; /* Bigger padding */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 div a + span {

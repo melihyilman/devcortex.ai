@@ -9,7 +9,7 @@ import (
 
 func Tools(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
-		Title: "All Tools",
+		Title:         "All Tools",
 		FeaturedTools: model.FeaturedTools,
 		OtherTools:    model.OtherTools,
 	}
