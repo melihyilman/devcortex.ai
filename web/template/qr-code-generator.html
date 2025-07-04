@@ -1,0 +1,44 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-qr-code fs-2 me-3"></i>
+                <h1 class="display-5">QR Code Generator</h1>
+            </div>
+            <p class="lead mb-4">Generate a QR code from any text or URL.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/qr-code-generator" method="post">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Text or URL to Encode</label>
+                            <input type="text" id="text" name="text" class="form-control bg-dark text-light border-secondary" value="{{with .ToolSpecificData}}{{.QRText}}{{end}}" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Generate QR Code</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .QRCode}}
+                        <div class="mt-4 text-center">
+                            <h2 class="h4">Generated QR Code</h2>
+                            <img src="data:image/png;base64,{{.QRCode}}" alt="Generated QR Code" class="img-fluid rounded border border-secondary mt-2" style="max-width: 256px;">
+                        </div>
+                        {{else if .Error}}
+                        <div class="mt-4">
+                            <div class="alert alert-danger" role="alert">
+                                {{.Error}}
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

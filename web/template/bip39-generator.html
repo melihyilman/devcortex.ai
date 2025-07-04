@@ -1,0 +1,56 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-wallet2 fs-2 me-3"></i>
+                <h1 class="display-5">BIP39 Passphrase Generator</h1>
+            </div>
+            <p class="lead mb-4">Generate a secure mnemonic passphrase for cryptocurrency wallets.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/bip39-generator" method="post">
+                        <div class="mb-3">
+                            <label for="word_count" class="form-label">Number of Words</label>
+                            <select id="word_count" name="word_count" class="form-select bg-dark text-light border-secondary">
+                                <option value="12" {{with .ToolSpecificData}}{{if eq .WordCount 12}}selected{{end}}{{end}}>12 Words</option>
+                                <option value="15" {{with .ToolSpecificData}}{{if eq .WordCount 15}}selected{{end}}{{end}}>15 Words</option>
+                                <option value="18" {{with .ToolSpecificData}}{{if eq .WordCount 18}}selected{{end}}{{end}}>18 Words</option>
+                                <option value="21" {{with .ToolSpecificData}}{{if eq .WordCount 21}}selected{{end}}{{end}}>21 Words</option>
+                                <option value="24" {{with .ToolSpecificData}}{{if eq .WordCount 24}}selected{{end}}{{end}}>24 Words</option>
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Generate Passphrase</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .GeneratedMnemonic}}
+                        <div class="mt-4">
+                            <label for="generatedMnemonic" class="form-label">Generated Passphrase</label>
+                            <div class="input-group">
+                                <input type="text" id="generatedMnemonic" class="form-control bg-dark text-light border-secondary" value="{{.GeneratedMnemonic}}" readonly>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('generatedMnemonic')">Copy</button>
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+</script>
+{{end}}

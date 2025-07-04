@@ -1,0 +1,39 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-gem fs-2 me-3"></i>
+                <h1 class="display-5">Favicon Generator</h1>
+            </div>
+            <p class="lead mb-4">Upload an image to generate a set of favicons for your website.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/favicon-generator" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="image_file" class="form-label">Upload Image (PNG, JPG)</label>
+                            <input type="file" id="image_file" name="image_file" class="form-control bg-dark text-light border-secondary" accept="image/png, image/jpeg" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Generate Favicons</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{with .ToolSpecificData}}
+                {{if .Error}}
+                 <div class="mt-4">
+                    <div class="alert alert-danger" role="alert">
+                        {{.Error}}
+                    </div>
+                </div>
+                {{end}}
+            {{end}}
+        </div>
+    </div>
+</div>
+{{end}}

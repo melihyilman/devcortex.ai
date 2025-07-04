@@ -1,0 +1,68 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-calendar-plus fs-2 me-3"></i>
+                <h1 class="display-5">Crontab Generator</h1>
+            </div>
+            <p class="lead mb-4">Easily generate crontab schedules. Leave a field blank for '*' (every).</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/crontab-generator" method="post">
+                        <div class="row g-3">
+                            <div class="col">
+                                <label for="minute" class="form-label">Minute</label>
+                                <input type="text" id="minute" name="minute" class="form-control bg-dark text-light border-secondary" placeholder="0-59" value="{{with .ToolSpecificData.Input}}{{.minute}}{{end}}">
+                            </div>
+                            <div class="col">
+                                <label for="hour" class="form-label">Hour</label>
+                                <input type="text" id="hour" name="hour" class="form-control bg-dark text-light border-secondary" placeholder="0-23" value="{{with .ToolSpecificData.Input}}{{.hour}}{{end}}">
+                            </div>
+                            <div class="col">
+                                <label for="day_of_month" class="form-label">Day (Month)</label>
+                                <input type="text" id="day_of_month" name="day_of_month" class="form-control bg-dark text-light border-secondary" placeholder="1-31" value="{{with .ToolSpecificData.Input}}{{.day_of_month}}{{end}}">
+                            </div>
+                            <div class="col">
+                                <label for="month" class="form-label">Month</label>
+                                <input type="text" id="month" name="month" class="form-control bg-dark text-light border-secondary" placeholder="1-12" value="{{with .ToolSpecificData.Input}}{{.month}}{{end}}">
+                            </div>
+                            <div class="col">
+                                <label for="day_of_week" class="form-label">Day (Week)</label>
+                                <input type="text" id="day_of_week" name="day_of_week" class="form-control bg-dark text-light border-secondary" placeholder="0-6" value="{{with .ToolSpecificData.Input}}{{.day_of_week}}{{end}}">
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-primary" type="submit">Generate Crontab</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .CronString}}
+                        <div class="mt-4">
+                            <label for="cronString" class="form-label">Generated Crontab</label>
+                            <div class="input-group">
+                                <input type="text" id="cronString" class="form-control bg-dark text-light border-secondary font-monospace" value="{{.CronString}}" readonly>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('cronString')">Copy</button>
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+</script>
+{{end}}

@@ -1,0 +1,47 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-image-alt fs-2 me-3"></i>
+                <h1 class="display-5">Image Converter</h1>
+            </div>
+            <p class="lead mb-4">Convert images between popular formats like PNG, JPEG, and GIF.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/image-converter" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="image_file" class="form-label">Upload Image</label>
+                            <input type="file" id="image_file" name="image_file" class="form-control bg-dark text-light border-secondary" accept="image/png, image/jpeg, image/gif" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="target_format" class="form-label">Convert To</label>
+                            <select id="target_format" name="target_format" class="form-select bg-dark text-light border-secondary">
+                                <option value="png">PNG</option>
+                                <option value="jpeg">JPEG</option>
+                                <option value="gif">GIF</option>
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Convert and Download</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{with .ToolSpecificData}}
+                {{if .Error}}
+                 <div class="mt-4">
+                    <div class="alert alert-danger" role="alert">
+                        {{.Error}}
+                    </div>
+                </div>
+                {{end}}
+            {{end}}
+        </div>
+    </div>
+</div>
+{{end}}

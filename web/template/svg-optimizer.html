@@ -1,0 +1,60 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-vector-pen fs-2 me-3"></i>
+                <h1 class="display-5">SVG Optimizer</h1>
+            </div>
+            <p class="lead mb-4">Optimize SVG files by removing unnecessary data and reducing file size.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/svg-optimizer" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="svg_file" class="form-label">Upload SVG File</label>
+                            <input type="file" id="svg_file" name="svg_file" class="form-control bg-dark text-light border-secondary" accept=".svg" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Optimize SVG</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{with .ToolSpecificData}}
+                {{if .OptimizedSVG}}
+                <div class="mt-4">
+                    <h2 class="h4">Optimization Results</h2>
+                    <div class="alert alert-success">
+                        <p>Original Size: {{.OriginalSize}} bytes</p>
+                        <p>Optimized Size: {{.OptimizedSize}} bytes</p>
+                        <p class="fw-bold">Reduction: {{.Reduction}}%</p>
+                    </div>
+                    <label for="optimized_svg" class="form-label">Optimized SVG Code</label>
+                    <textarea id="optimized_svg" rows="10" class="form-control bg-dark text-light border-secondary" readonly>{{.OptimizedSVG}}</textarea>
+                    <button class="btn btn-secondary mt-2" onclick="copyToClipboard('optimized_svg')">Copy Code</button>
+                </div>
+                {{else if .Error}}
+                 <div class="mt-4">
+                    <div class="alert alert-danger" role="alert">
+                        {{.Error}}
+                    </div>
+                </div>
+                {{end}}
+            {{end}}
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+</script>
+{{end}}
