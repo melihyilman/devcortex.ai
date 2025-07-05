@@ -1,0 +1,59 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-palette fs-2 me-3"></i>
+                <h1 class="display-5">Color Format Converter</h1>
+            </div>
+            <p class="lead mb-4">Convert color codes between Hex, RGB, and HSL formats.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/color-converter" method="post">
+                        <div class="mb-3">
+                            <label for="color_input" class="form-label">Enter Color (e.g., #ff0000, rgb(255,0,0))</label>
+                            <input type="text" id="color_input" name="color_input" class="form-control bg-dark text-light border-secondary" value="{{with .ToolSpecificData}}{{.Input}}{{end}}" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Convert</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .Hex}}
+                        <div class="mt-4">
+                            <h2 class="h4">Converted Formats</h2>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="mb-1"><strong>Hex:</strong> {{.Hex}}</p>
+                                    <p class="mb-1"><strong>RGB:</strong> {{.RGB}}</p>
+                                    <p class="mb-0"><strong>HSL:</strong> {{.HSL}}</p>
+                                </div>
+                                <div class="ms-4" style="width: 100px; height: 100px; background-color: var(--color-preview, #000); border-radius: 50%;" data-color="{{.Color}}"></div>
+                            </div>
+                        </div>
+                        {{else if .Error}}
+                        <div class="mt-4">
+                            <div class="alert alert-danger" role="alert">
+                                {{.Error}}
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const colorPreview = document.querySelector('[data-color]');
+    if (colorPreview) {
+        colorPreview.style.setProperty('--color-preview', colorPreview.dataset.color);
+    }
+});
+</script>
+{{end}}

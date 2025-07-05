@@ -1,5 +1,5 @@
 {{define "content"}}
-<div class="text-center mb-5">
+<div class="text-center mt-5 mb-5">
     <h2><i class="bi bi-stars me-2"></i>Featured Tools</h2>
     <p class="lead text-body-secondary">Our next-gen tools, powered by AI, advanced and interactive.</p>
 </div>
@@ -16,19 +16,106 @@
     {{end}}
 </div>
 
-<div class="text-center mb-4">
+<div class="text-center mb-4 mt-5">
     <h3 class="text-muted"><i class="bi bi-tools me-2"></i>All Other Tools</h3>
 </div>
-<div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
-    {{range .OtherTools}}
-    <div class="col">
-        <a href="{{.URL}}" class="card h-100 text-center text-decoration-none">
-            <div class="card-body d-flex flex-column justify-content-center">
-                <i class="{{.Icon}} display-6"></i>
-                <h6 class="card-title mt-2">{{.Name}}</h6>
+
+<div class="row justify-content-center mb-4">
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="search" id="toolSearch" class="form-control bg-dark text-light border-secondary rounded-start-pill" placeholder="Search for tools...">
+            <span class="input-group-text bg-dark text-light border-secondary rounded-end-pill"><i class="bi bi-search"></i></span>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="toolsAccordion">
+    {{$categorizedTools := .ToolSpecificData}}
+    {{range $index, $category := (keys $categorizedTools)}}
+    {{$tools := (index $categorizedTools $category)}}
+    <div class="accordion-item bg-dark tool-category">
+        <h2 class="accordion-header" id="heading-{{$index}}">
+            <button class="accordion-button bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$index}}" aria-expanded="true" aria-controls="collapse-{{$index}}">
+                <i class="{{(index $tools 0).Icon}} me-2"></i>
+                <span class="me-auto">{{$category}}</span>
+            </button>
+        </h2>
+        <div id="collapse-{{$index}}" class="accordion-collapse collapse show" aria-labelledby="heading-{{$index}}">
+            <div class="accordion-body">
+                <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center tool-list">
+                    {{range $tools}}
+                    <div class="col tool-card" data-name="{{.Name}}" data-description="{{.Description}}">
+                        <a href="{{.URL}}" class="card h-100 text-center text-decoration-none">
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <i class="{{.Icon}} display-6"></i>
+                                <h6 class="card-title mt-2">{{.Name}}</h6>
+                            </div>
+                        </a>
+                    </div>
+                    {{end}}
+                </div>
             </div>
-        </a>
+        </div>
     </div>
     {{end}}
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('toolSearch');
+    const categories = document.querySelectorAll('.tool-category');
+
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+
+        categories.forEach(category => {
+            const toolCards = category.querySelectorAll('.tool-card');
+            let visibleTools = 0;
+
+            toolCards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                const description = card.dataset.description.toLowerCase();
+
+                if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = '';
+                    visibleTools++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide category title if no tools are visible
+            if (visibleTools > 0) {
+                category.style.display = '';
+            } else {
+                category.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.accordion-button {
+    font-weight: 500;
+    border-bottom: 1px solid #495057;
+}
+.accordion-button:not(.collapsed) {
+    box-shadow: none; /* Remove the default blue shadow on focus */
+}
+.accordion-button::after {
+    /* Override Bootstrap's default icon completely */
+    background-image: none !important;
+    content: '-';
+    font-size: 1.5rem;
+    font-weight: bold;
+    transform: none;
+    margin-left: 1rem;
+    line-height: 1;
+}
+.accordion-button.collapsed::after {
+    content: '+';
+}
+</style>
+
 {{end}}

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"bytes"
+	"html/template"
 	"net/http"
 
 	"devcortex.ai/internal/view"
@@ -10,7 +11,7 @@ import (
 
 func MarkdownPreviewerTool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
-		Title: "Markdown Previewer",
+		Title:            "Markdown Previewer",
 		ToolSpecificData: make(map[string]interface{}),
 	}
 
@@ -20,7 +21,7 @@ func MarkdownPreviewerTool(w http.ResponseWriter, r *http.Request) {
 		if err := goldmark.Convert([]byte(markdownInput), &buf); err != nil {
 			pageData.ToolSpecificData.(map[string]interface{})["Result"] = "Error converting markdown: " + err.Error()
 		} else {
-			pageData.ToolSpecificData.(map[string]interface{})["Result"] = buf.String()
+			pageData.ToolSpecificData.(map[string]interface{})["Result"] = template.HTML(buf.String())
 		}
 		pageData.ToolSpecificData.(map[string]interface{})["Markdown"] = markdownInput
 	}

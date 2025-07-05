@@ -1,0 +1,62 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-hash fs-2 me-3"></i>
+                <h1 class="display-5">HMAC Generator</h1>
+            </div>
+            <p class="lead mb-4">Generate a Hash-based Message Authentication Code (HMAC) using a secret key.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/hmac-generator" method="post">
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" rows="4" class="form-control bg-dark text-light border-secondary" required>{{with .ToolSpecificData}}{{.Message}}{{end}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="secret" class="form-label">Secret Key</label>
+                            <input type="text" id="secret" name="secret" class="form-control bg-dark text-light border-secondary" value="{{with .ToolSpecificData}}{{.Secret}}{{end}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="algorithm" class="form-label">Algorithm</label>
+                            <select id="algorithm" name="algorithm" class="form-select bg-dark text-light border-secondary">
+                                <option value="sha256" {{with .ToolSpecificData}}{{if eq .Algorithm "sha256"}}selected{{end}}{{end}}>SHA-256</option>
+                                <option value="sha1" {{with .ToolSpecificData}}{{if eq .Algorithm "sha1"}}selected{{end}}{{end}}>SHA-1</option>
+                                <option value="sha512" {{with .ToolSpecificData}}{{if eq .Algorithm "sha512"}}selected{{end}}{{end}}>SHA-512</option>
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Generate HMAC</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .GeneratedHMAC}}
+                        <div class="mt-4">
+                            <label for="generatedHMAC" class="form-label">Generated HMAC</label>
+                            <div class="input-group">
+                                <input type="text" id="generatedHMAC" class="form-control bg-dark text-light border-secondary" value="{{.GeneratedHMAC}}" readonly>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('generatedHMAC')">Copy</button>
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+</script>
+{{end}}

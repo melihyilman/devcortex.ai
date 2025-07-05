@@ -1,0 +1,69 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-terminal fs-2 me-3"></i>
+                <h1 class="display-5">cURL Command Builder</h1>
+            </div>
+            <p class="lead mb-4">Build cURL commands with an easy-to-use interface.</p>
+
+            <div class="card bg-dark text-light border-secondary">
+                <div class="card-body">
+                    <form action="/tools/curl-builder" method="post">
+                        <div class="mb-3">
+                            <label for="url" class="form-label">URL</label>
+                            <input type="url" id="url" name="url" class="form-control bg-dark text-light border-secondary" value="{{with .ToolSpecificData.Input}}{{.url}}{{end}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="method" class="form-label">Method</label>
+                            <select id="method" name="method" class="form-select bg-dark text-light border-secondary">
+                                <option value="GET" {{with .ToolSpecificData.Input}}{{if eq .method "GET"}}selected{{end}}{{end}}>GET</option>
+                                <option value="POST" {{with .ToolSpecificData.Input}}{{if eq .method "POST"}}selected{{end}}{{end}}>POST</option>
+                                <option value="PUT" {{with .ToolSpecificData.Input}}{{if eq .method "PUT"}}selected{{end}}{{end}}>PUT</option>
+                                <option value="DELETE" {{with .ToolSpecificData.Input}}{{if eq .method "DELETE"}}selected{{end}}{{end}}>DELETE</option>
+                                <option value="PATCH" {{with .ToolSpecificData.Input}}{{if eq .method "PATCH"}}selected{{end}}{{end}}>PATCH</option>
+                                <option value="HEAD" {{with .ToolSpecificData.Input}}{{if eq .method "HEAD"}}selected{{end}}{{end}}>HEAD</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="headers" class="form-label">Headers (one per line)</label>
+                            <textarea id="headers" name="headers" rows="4" class="form-control bg-dark text-light border-secondary font-monospace" placeholder="Content-Type: application/json">{{with .ToolSpecificData.Input}}{{.headers}}{{end}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="body" class="form-label">Request Body</label>
+                            <textarea id="body" name="body" rows="6" class="form-control bg-dark text-light border-secondary font-monospace">{{with .ToolSpecificData.Input}}{{.body}}{{end}}</textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Build Command</button>
+                        </div>
+                    </form>
+
+                    {{with .ToolSpecificData}}
+                        {{if .CURLCommand}}
+                        <div class="mt-4">
+                            <label for="curlCommand" class="form-label">Generated cURL Command</label>
+                            <div class="input-group">
+                                <textarea id="curlCommand" rows="5" class="form-control bg-dark text-light border-secondary font-monospace" readonly>{{.CURLCommand}}</textarea>
+                                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('curlCommand')">Copy</button>
+                            </div>
+                        </div>
+                        {{end}}
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(elementId) {
+    var copyText = document.getElementById(elementId);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+</script>
+{{end}}

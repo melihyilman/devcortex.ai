@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -8,30 +9,59 @@ import (
 	"devcortex.ai/internal/view"
 )
 
-type CronData struct {
-	Expression  string
-	Explanation string
-	Error       string
-}
-
 func CronTool(w http.ResponseWriter, r *http.Request) {
-	data := CronData{}
-	cronService := tool.NewCronExplainer()
+	pageData := &view.PageData{
+		Title: "Cron Job Explainer & Generator",
+	}
+
+	toolData := make(map[string]interface{})
 
 	if r.Method == http.MethodPost {
-		expression := strings.TrimSpace(r.FormValue("cron_expression"))
-		data.Expression = expression
+		action := r.FormValue("action")
 
-		explanation, err := cronService.Explain(expression)
-		if err != nil {
-			data.Error = err.Error()
-		} else {
-			data.Explanation = explanation
+		if action == "explain" {
+			expression := strings.TrimSpace(r.FormValue("cron_expression"))
+			toolData["Expression"] = expression
+
+			cronService := tool.NewCronExplainer()
+			explanation, err := cronService.Explain(expression)
+			if err != nil {
+				toolData["Error"] = err.Error()
+			} else {
+				toolData["Explanation"] = explanation
+			}
+		} else if action == "generate" {
+			minute := r.FormValue("minute")
+			hour := r.FormValue("hour")
+			dayOfMonth := r.FormValue("day_of_month")
+			month := r.FormValue("month")
+			dayOfWeek := r.FormValue("day_of_week")
+
+			cronString := fmt.Sprintf("%s %s %s %s %s",
+				getPart(minute),
+				getPart(hour),
+				getPart(dayOfMonth),
+				getPart(month),
+				getPart(dayOfWeek),
+			)
+			toolData["GeneratedCron"] = cronString
+			toolData["Input"] = map[string]string{
+				"minute":       minute,
+				"hour":         hour,
+				"day_of_month": dayOfMonth,
+				"month":        month,
+				"day_of_week":  dayOfWeek,
+			}
 		}
 	}
 
-	view.Render(w, r, "cron.html", &view.PageData{
-		Title:            "Cron Explainer",
-		ToolSpecificData: data,
-	})
+	pageData.ToolSpecificData = toolData
+	view.Render(w, r, "cron.html", pageData)
+}
+
+func getPart(value string) string {
+	if value == "" {
+		return "*"
+	}
+	return value
 }

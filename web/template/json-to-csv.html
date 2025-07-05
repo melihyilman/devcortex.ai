@@ -1,0 +1,31 @@
+{{template "layout.html" .}}
+
+{{define "content"}}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-file-earmark-spreadsheet fs-2 me-3"></i>
+                <h1 class="display-5">JSON to CSV Converter</h1>
+            </div>
+            <p class="lead mb-4">Convert a JSON array of objects to CSV format.</p>
+
+            <form action="/tools/json-to-csv" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="json_input" class="form-label">JSON Input (Array of Objects)</label>
+                        <textarea id="json_input" name="json_input" rows="15" class="form-control bg-dark text-light border-secondary font-monospace">{{with .ToolSpecificData}}{{.JSONInput}}{{end}}</textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="result" class="form-label">CSV Output</label>
+                        <textarea id="result" rows="15" class="form-control {{if .ToolSpecificData}}{{if not .Success}}bg-danger text-white{{else}}bg-dark text-light{{end}}{{else}}bg-dark text-light{{end}} border-secondary font-monospace" readonly>{{with .ToolSpecificData}}{{.Result}}{{end}}</textarea>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 mt-3">
+                    <button class="btn btn-primary" type="submit">Convert</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{end}}
