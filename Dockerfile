@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY --from=builder /app/web/static ./web/static/
 
-COPY --from=builder /app/web/template ./web/templates/
+COPY --from=builder /app/web/template ./web/template/
 
 COPY --from=builder /app/app .
 
