@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"fmt"
 
 	"devcortex.ai/internal/view"
 	"github.com/tdewolff/minify/v2"
@@ -11,6 +12,11 @@ import (
 func HTMLFormatterTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "HTML Formatter",
+		ToolSpecificData: map[string]interface{}{
+			"HTMLInput": r.URL.Query().Get("HTMLInput"),
+			"Result":    r.URL.Query().Get("Result"),
+			"Success":   r.URL.Query().Get("Success") == "true",
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -21,15 +27,6 @@ func HTMLFormatterTool(w http.ResponseWriter, r *http.Request) {
 		m := minify.New()
 		m.AddFunc("text/html", html.Minify)
 
-		
-		
-		
-		
-
-		
-		
-		
-
 		minified, err := m.String("text/html", htmlInput)
 		if err != nil {
 			result = "Error formatting HTML: " + err.Error()
@@ -38,11 +35,13 @@ func HTMLFormatterTool(w http.ResponseWriter, r *http.Request) {
 			success = true
 		}
 
-		data.ToolSpecificData = map[string]interface{}{
+		redirectData := map[string]string{
 			"HTMLInput": htmlInput,
 			"Result":    result,
-			"Success":   success,
+			"Success":   fmt.Sprintf("%t", success),
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "html-formatter.html", data)

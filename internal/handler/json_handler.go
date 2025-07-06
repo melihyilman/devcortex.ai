@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"devcortex.ai/internal/tool"
 	"devcortex.ai/internal/view"
@@ -15,22 +16,32 @@ type JSONData struct {
 }
 
 func JSONTool(w http.ResponseWriter, r *http.Request) {
-	data := JSONData{}
+	isValid, _ := strconv.ParseBool(r.URL.Query().Get("IsValid"))
+	data := JSONData{
+		InputJSON: r.URL.Query().Get("InputJSON"),
+		Result:    r.URL.Query().Get("Result"),
+		IsValid:   isValid,
+		Error:     r.URL.Query().Get("Error"),
+	}
 	jsonService := tool.NewJSONFormatter()
 
 	if r.Method == http.MethodPost {
 		inputJSON := r.FormValue("jsonInput")
-		data.InputJSON = inputJSON
-
 		formatted, isValid, err := jsonService.Format(inputJSON)
-		if err != nil {
-			data.Error = err.Error()
-			data.IsValid = false
-			data.Result = inputJSON 
-		} else {
-			data.Result = formatted
-			data.IsValid = isValid
+
+		redirectData := map[string]string{
+			"InputJSON": inputJSON,
+			"IsValid":   strconv.FormatBool(isValid),
 		}
+
+		if err != nil {
+			redirectData["Error"] = err.Error()
+			redirectData["Result"] = inputJSON
+		} else {
+			redirectData["Result"] = formatted
+		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "json.html", &view.PageData{

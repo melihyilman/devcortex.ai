@@ -8,6 +8,7 @@ import (
 	"encoding/base64"
 	"io"
 	"net/http"
+	"fmt"
 
 	"devcortex.ai/internal/view"
 )
@@ -15,6 +16,10 @@ import (
 func EncryptDecryptTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "Encrypt/Decrypt Text (AES-GCM)",
+		ToolSpecificData: map[string]interface{}{
+			"Result":  r.URL.Query().Get("Result"),
+			"Success": r.URL.Query().Get("Success") == "true",
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -24,7 +29,6 @@ func EncryptDecryptTool(w http.ResponseWriter, r *http.Request) {
 		var result string
 		var success bool
 
-		
 		key := sha256.Sum256([]byte(password))
 
 		if action == "encrypt" {
@@ -45,10 +49,12 @@ func EncryptDecryptTool(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		data.ToolSpecificData = map[string]interface{}{
+		redirectData := map[string]string{
 			"Result":  result,
-			"Success": success,
+			"Success": fmt.Sprintf("%t", success),
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "encrypt-decrypt.html", data)

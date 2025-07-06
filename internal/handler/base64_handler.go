@@ -17,7 +17,9 @@ func Base64Tool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
 		Title: "Base64 Tool",
 		ToolSpecificData: map[string]interface{}{
-			"Operation": "encode",
+			"InputText": r.URL.Query().Get("inputText"),
+			"Operation": r.URL.Query().Get("operation"),
+			"Result":    r.URL.Query().Get("result"),
 		},
 	}
 
@@ -35,11 +37,14 @@ func Base64Tool(w http.ResponseWriter, r *http.Request) {
 				result = string(decodedBytes)
 			}
 		}
-		pageData.ToolSpecificData = map[string]interface{}{
-			"InputText": inputText,
-			"Operation": operation,
-			"Result":    result,
+
+		data := map[string]string{
+			"inputText": inputText,
+			"operation": operation,
+			"result":    result,
 		}
+		redirectToPageWithData(w, r, data)
+		return
 	}
 
 	view.Render(w, r, "base64.html", pageData)
