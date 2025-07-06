@@ -1,34 +1,23 @@
-# === AŞAMA 1: Derleyici (Builder) ===
-# Go'nun kurulu olduğu bir imajı temel alarak başlıyoruz.
-# go.mod dosyanızla uyumlu bir sürüm seçin (ör: golang:1.22-alpine).
-FROM golang:1.22-alpine AS builder
+# Stage 1: Build the Go application
+# Use a Go version that matches or exceeds the one in go.mod (go 1.24.4)
+FROM golang:1.24-alpine AS builder
 
-# Çalışma dizinini /app olarak ayarlıyoruz.
 WORKDIR /app
 
-# Önce sadece bağımlılık dosyalarını kopyalayıp indiriyoruz.
-# Bu sayede kod değişmediği sürece Docker bu adımı atlayarak derlemeyi hızlandırır.
+# Copy go.mod and go.sum to leverage Docker layer caching
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Projenin geri kalan tüm dosyalarını kopyalıyoruz.
+# Copy the rest of the application source code
 COPY . .
 
-# Uygulamayı cmd/web dizininden derliyoruz.
-# CGO_ENABLED=0 statik bir binary oluşturmak için önemlidir.
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /app/server ./cmd/web
+# Build the application, creating a static binary
+RUN CGO_ENABLED=0 GOOS=linux go build -o app ./cmd/web
 
-# === AŞAMA 2: Nihai İmaj (Final Image) ===
-# Çok küçük ve güvenli bir temel imaj olan Alpine'ı kullanıyoruz.
+# Stage 2: Create the final, minimal image
 FROM alpine:latest
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-USER appuser
+COPY --from=builder /app/app .
 
-WORKDIR /app
-
-COPY --from=builder /app/server .
-COPY --from=builder /app/web ./web
-
-EXPOSE 8080
-CMD ["./server"]
+# The command to run when the container starts.
+CMD ["./app"]
