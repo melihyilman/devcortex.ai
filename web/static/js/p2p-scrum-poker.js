@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (isHost) {
-            revealCardsBtn.disabled = !allVoted || cardsRevealed;
+            revealCardsBtn.disabled = cardsRevealed;
         }
     }
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         resultsSummary.classList.add('d-none');
         if (isHost) {
-            revealCardsBtn.disabled = true;
+            revealCardsBtn.disabled = false;
         }
     }
 

@@ -73,6 +73,6 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/tools/net-cheatsheet", NetCommandsCheatsheetTool)
 
 	mux.HandleFunc("/analytics", AnalyticsHandler)
-	mux.HandleFunc("/tools/p2p-scrum-poker", P2PScrumPokerHandler)
+	mux.HandleFunc("/tools/peer-to-peer-scrum-poker", PeerToPeerScrumPokerHandler)
 	mux.HandleFunc("/sitemap.xml", SitemapHandler)
 }

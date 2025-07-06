@@ -31,10 +31,10 @@ var FeaturedTools = []Tool{
 		Category:    "featured",
 	},
 	{
-		Name:        "P2P Scrum Poker",
-		URL:         "/tools/p2p-scrum-poker",
+		Name:        "Peer-to-Peer Scrum Poker",
+		URL:         "/tools/peer-to-peer-scrum-poker",
 		Icon:        "bi bi-layers-fill",
-		Description: "Real-time, serverless Scrum Poker for agile teams.",
+		Description: "Real-time, serverless Scrum Poker for agile teams using WebRTC.",
 		Category:    "Project Management",
 	},
 }
