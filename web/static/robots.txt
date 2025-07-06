@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devcortex.ai/sitemap.xml

@@ -29,7 +29,6 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/tools/random-string", RandomStringTool)
 	mux.HandleFunc("/tools/cron-explainer", CronTool)
 
-	
 	mux.HandleFunc("/tools/token-generator", TokenGeneratorTool)
 	mux.HandleFunc("/tools/bcrypt-hash", BcryptTool)
 	mux.HandleFunc("/tools/encrypt-decrypt", EncryptDecryptTool)
@@ -75,5 +74,5 @@ func RegisterRoutes(mux *http.ServeMux) {
 
 	mux.HandleFunc("/analytics", AnalyticsHandler)
 	mux.HandleFunc("/tools/p2p-scrum-poker", P2PScrumPokerHandler)
-
+	mux.HandleFunc("/sitemap.xml", SitemapHandler)
 }
