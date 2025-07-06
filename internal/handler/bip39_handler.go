@@ -17,11 +17,11 @@ func Bip39GeneratorTool(w http.ResponseWriter, r *http.Request) {
 		wordCountStr := r.FormValue("word_count")
 		wordCount, err := strconv.Atoi(wordCountStr)
 		if err != nil || !isValidWordCount(wordCount) {
-			wordCount = 12 // Default to 12 words if invalid
+			wordCount = 12 
 		}
 
-		// Entropy bits must be a multiple of 32
-		// 12 words = 128 bits, 24 words = 256 bits
+		
+		
 		entropy, err := bip39.NewEntropy((wordCount / 3) * 32)
 		if err != nil {
 			data.ToolSpecificData = map[string]interface{}{

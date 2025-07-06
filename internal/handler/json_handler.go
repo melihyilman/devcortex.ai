@@ -26,7 +26,7 @@ func JSONTool(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			data.Error = err.Error()
 			data.IsValid = false
-			data.Result = inputJSON // Show the original input on error
+			data.Result = inputJSON 
 		} else {
 			data.Result = formatted
 			data.IsValid = isValid

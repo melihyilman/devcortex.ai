@@ -20,11 +20,11 @@ func ColorConverterTool(w http.ResponseWriter, r *http.Request) {
 
 		c, err := colorful.Hex(colorInput)
 		if err != nil {
-			// Try parsing as RGB
+			
 			var R, G, B float64
 			_, err = fmt.Sscanf(colorInput, "rgb(%f, %f, %f)", &R, &G, &B)
 			if err != nil {
-				// Try parsing as HSL
+				
 				var H, S, L float64
 				_, err = fmt.Sscanf(colorInput, "hsl(%f, %f, %f)", &H, &S, &L)
 				if err != nil {

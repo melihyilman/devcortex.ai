@@ -6,20 +6,20 @@ import (
 	"strings"
 )
 
-// JsonToCodeConverter defines the interface for the JSON to Code conversion service.
+
 type JsonToCodeConverter interface {
 	Convert(jsonString, language string) (string, error)
 }
 
-// jsonToCodeConverter is the implementation of the JsonToCodeConverter interface.
+
 type jsonToCodeConverter struct{}
 
-// NewJsonToCodeConverter creates a new JsonToCodeConverter service.
+
 func NewJsonToCodeConverter() JsonToCodeConverter {
 	return &jsonToCodeConverter{}
 }
 
-// Convert handles the main logic for converting a JSON string to code.
+
 func (s *jsonToCodeConverter) Convert(jsonString, language string) (string, error) {
 	var jsonData interface{}
 	err := json.Unmarshal([]byte(jsonString), &jsonData)
@@ -64,13 +64,13 @@ func (s *jsonToCodeConverter) Convert(jsonString, language string) (string, erro
 	}
 }
 
-// TypeDefinition represents a class/struct/interface definition
+
 type TypeDefinition struct {
 	Name   string
 	Fields []Field
 }
 
-// Field represents a field within a type definition
+
 type Field struct {
 	Name    string
 	Type    string

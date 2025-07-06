@@ -1,0 +1,12 @@
+# Git ve CI/CD dosyaları
+.git
+.github
+.gitignore
+
+# IDE ve editör ayarları
+.vscode
+.idea
+
+# Yerelde derlenmiş dosyalar ve OS'e özel dosyalar
+devcortex.ai
+.DS_Store

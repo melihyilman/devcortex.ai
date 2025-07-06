@@ -10,9 +10,9 @@ import (
 	"github.com/xwb1989/sqlparser"
 )
 
-// Recommendation holds structured advice about a SQL query.
+
 type Recommendation struct {
-	Severity string // "Critical", "Warning", "Info"
+	Severity string 
 	Title    string
 	Detail   string
 }
@@ -52,13 +52,13 @@ func analyzeSQL(query string) ([]Recommendation, sqlparser.SQLNode) {
 		}}, nil
 	}
 
-	// Use a map to avoid duplicate recommendations
+	
 	recMap := make(map[string]Recommendation)
 
 	sqlparser.Walk(func(node sqlparser.SQLNode) (kontinue bool, err error) {
 		switch n := node.(type) {
 		case *sqlparser.Select:
-			// Rule: Avoid SELECT *
+			
 			for _, sel := range n.SelectExprs {
 				if _, ok := sel.(*sqlparser.StarExpr); ok {
 					recMap["select-star"] = Recommendation{
@@ -69,7 +69,7 @@ func analyzeSQL(query string) ([]Recommendation, sqlparser.SQLNode) {
 					break
 				}
 			}
-			// Rule: ORDER BY without LIMIT
+			
 			if n.OrderBy != nil && n.Limit == nil {
 				recMap["orderby-no-limit"] = Recommendation{
 					Severity: "Info",
@@ -94,7 +94,7 @@ func analyzeSQL(query string) ([]Recommendation, sqlparser.SQLNode) {
 				}
 			}
 		case *sqlparser.ComparisonExpr:
-			// Rule: LIKE with leading wildcard
+			
 			if n.Operator == sqlparser.LikeStr {
 				if val, ok := n.Right.(*sqlparser.SQLVal); ok {
 					if len(val.Val) > 0 && val.Val[0] == '%' {
@@ -106,7 +106,7 @@ func analyzeSQL(query string) ([]Recommendation, sqlparser.SQLNode) {
 					}
 				}
 			}
-			// Rule: Function on a column in WHERE clause
+			
 			if _, ok := n.Left.(*sqlparser.FuncExpr); ok {
 				recMap["function-on-column"] = Recommendation{
 					Severity: "Warning",
@@ -114,7 +114,7 @@ func analyzeSQL(query string) ([]Recommendation, sqlparser.SQLNode) {
 					Detail:   "Applying a function (e.g., LOWER(), DATE()) to a column in the WHERE clause can prevent the database from using an index on that column. Try to apply the function to the value instead.",
 				}
 			}
-			// Rule: IN clause with a subquery
+			
 			if n.Operator == sqlparser.InStr {
 				if _, ok := n.Right.(*sqlparser.Subquery); ok {
 					recMap["in-subquery"] = Recommendation{
@@ -178,7 +178,7 @@ func generateASTGraph(root sqlparser.SQLNode) string {
 			buf.WriteString(fmt.Sprintf("  node%d -> node%d;\n", parentID, nodeID))
 		}
 
-		// Recursively walk children for common node types
+		
 		switch n := node.(type) {
 		case *sqlparser.Select:
 			for _, expr := range n.SelectExprs {
@@ -191,7 +191,7 @@ func generateASTGraph(root sqlparser.SQLNode) string {
 		case *sqlparser.JoinTableExpr:
 			walk(n.LeftExpr, nodeID)
 			walk(n.RightExpr, nodeID)
-			// Check if the On condition is not empty
+			
 			if n.Condition.On != nil {
 				walk(n.Condition.On, nodeID)
 			}

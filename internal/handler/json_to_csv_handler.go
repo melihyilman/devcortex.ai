@@ -29,7 +29,7 @@ func JSONToCSVTool(w http.ResponseWriter, r *http.Request) {
 			if len(jsonData) == 0 {
 				result = "The JSON array is empty."
 			} else {
-				// Get headers and sort them for consistent order
+				
 				headers := []string{}
 				for key := range jsonData[0] {
 					headers = append(headers, key)
@@ -39,11 +39,11 @@ func JSONToCSVTool(w http.ResponseWriter, r *http.Request) {
 				var csvBuffer bytes.Buffer
 				csvWriter := csv.NewWriter(&csvBuffer)
 
-				// Write header
+				
 				if err := csvWriter.Write(headers); err != nil {
 					result = "Error writing CSV header: " + err.Error()
 				} else {
-					// Write rows
+					
 					for _, row := range jsonData {
 						record := []string{}
 						for _, header := range headers {

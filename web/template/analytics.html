@@ -1,0 +1,24 @@
+{{define "title"}}Analytics{{end}}
+{{define "content"}}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-4">Page Visits</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-lg">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="py-3 px-6 text-left">Page Path</th>
+                    <th class="py-3 px-6 text-left">Visits</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr class="border-b">
+                    <td class="py-4 px-6">{{.Path}}</td>
+                    <td class="py-4 px-6">{{.Count}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{end}}

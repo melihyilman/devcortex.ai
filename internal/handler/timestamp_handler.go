@@ -13,10 +13,10 @@ func TimestampTool(w http.ResponseWriter, r *http.Request) {
 		Title: "Date/Time Converter",
 	}
 
-	// Provide a list of common timezones to the template
+	
 	timezones := []string{"UTC", "America/New_York", "Europe/London", "Asia/Tokyo", "Australia/Sydney"}
 
-	// Default view data
+	
 	toolData := map[string]interface{}{
 		"Timezones": timezones,
 		"Now":       time.Now().Unix(),
@@ -27,7 +27,7 @@ func TimestampTool(w http.ResponseWriter, r *http.Request) {
 		timezoneStr := r.FormValue("timezone")
 		loc, err := time.LoadLocation(timezoneStr)
 		if err != nil {
-			loc = time.UTC // Default to UTC on error
+			loc = time.UTC 
 		}
 
 		if action == "to_date" {
@@ -43,7 +43,7 @@ func TimestampTool(w http.ResponseWriter, r *http.Request) {
 		} else if action == "to_timestamp" {
 			dateStr := r.FormValue("date_string")
 			toolData["DateStringInput"] = dateStr
-			// Use a more flexible layout that doesn't assume timezone
+			
 			const layout = "2006-01-02 15:04:05"
 			t, err := time.ParseInLocation(layout, dateStr, loc)
 			if err != nil {

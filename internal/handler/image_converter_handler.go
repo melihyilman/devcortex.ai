@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"devcortex.ai/internal/view"
-	// Anonymous import for image decoding
+	
 	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
@@ -73,7 +73,7 @@ func ImageConverterTool(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", contentType)
 		w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", newFileName))
 		w.Write(outputBuffer.Bytes())
-		return // Return after writing the file
+		return 
 	}
 
 	view.Render(w, r, "image-converter.html", data)

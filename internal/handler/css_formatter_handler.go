@@ -21,7 +21,7 @@ func CSSFormatterTool(w http.ResponseWriter, r *http.Request) {
 		m := minify.New()
 		m.AddFunc("text/css", css.Minify)
 
-		// Using the minify library to format the CSS.
+		
 		formatted, err := m.String("text/css", cssInput)
 		if err != nil {
 			result = "Error formatting CSS: " + err.Error()

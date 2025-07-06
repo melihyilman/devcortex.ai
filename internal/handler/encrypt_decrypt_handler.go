@@ -24,7 +24,7 @@ func EncryptDecryptTool(w http.ResponseWriter, r *http.Request) {
 		var result string
 		var success bool
 
-		// Derive a 32-byte key from the password using SHA-256
+		
 		key := sha256.Sum256([]byte(password))
 
 		if action == "encrypt" {

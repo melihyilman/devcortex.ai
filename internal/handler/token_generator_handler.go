@@ -14,11 +14,11 @@ func TokenGeneratorTool(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method == http.MethodPost {
-		// Generate a 32-byte random token
+		
 		b := make([]byte, 32)
 		if _, err := rand.Read(b); err != nil {
-			// Handle error
-			// For simplicity, we'll just show an error in the token field
+			
+			
 			data.ToolSpecificData = map[string]interface{}{
 				"GeneratedToken": "Error generating token",
 			}

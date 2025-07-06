@@ -20,25 +20,25 @@ func RSAGeneratorTool(w http.ResponseWriter, r *http.Request) {
 		bitSizeStr := r.FormValue("bit_size")
 		bitSize, err := strconv.Atoi(bitSizeStr)
 		if err != nil || (bitSize != 2048 && bitSize != 4096) {
-			bitSize = 2048 // Default to 2048 bits
+			bitSize = 2048 
 		}
 
 		privateKey, err := rsa.GenerateKey(rand.Reader, bitSize)
 		if err != nil {
-			// Handle error
+			
 		}
 
-		// Encode private key to PEM format
+		
 		privateKeyPEM := &pem.Block{
 			Type:  "RSA PRIVATE KEY",
 			Bytes: x509.MarshalPKCS1PrivateKey(privateKey),
 		}
 		privateKeyStr := string(pem.EncodeToMemory(privateKeyPEM))
 
-		// Encode public key to PEM format
+		
 		publicKeyBytes, err := x509.MarshalPKIXPublicKey(&privateKey.PublicKey)
 		if err != nil {
-			// Handle error
+			
 		}
 		publicKeyPEM := &pem.Block{
 			Type:  "PUBLIC KEY",
