@@ -30,10 +30,17 @@ var FeaturedTools = []Tool{
 		Icon:        "bi bi-braces-asterisk",
 		Category:    "featured",
 	},
+	{
+		Name:        "P2P Scrum Poker",
+		URL:         "/tools/p2p-scrum-poker",
+		Icon:        "bi bi-layers-fill",
+		Description: "Real-time, serverless Scrum Poker for agile teams.",
+		Category:    "Project Management",
+	},
 }
 
 var OtherTools = []Tool{
-	
+
 	{Name: "Token Generator", Description: "Generate secure tokens.", URL: "/tools/token-generator", Icon: "bi bi-key", Category: "Cryptography & Security"},
 	{Name: "Bcrypt Hash & Compare", Description: "Hash and compare passwords with Bcrypt.", URL: "/tools/bcrypt-hash", Icon: "bi bi-shield-lock", Category: "Cryptography & Security"},
 	{Name: "Encrypt/Decrypt Text", Description: "Encrypt and decrypt text with AES.", URL: "/tools/encrypt-decrypt", Icon: "bi bi-lock", Category: "Cryptography & Security"},
@@ -44,7 +51,6 @@ var OtherTools = []Tool{
 	{Name: "JWT Encoder/Decoder", Description: "Encode or decode JWT tokens.", URL: "/tools/jwt-decoder", Icon: "bi bi-box-arrow-in-right", Category: "Cryptography & Security"},
 	{Name: "Hash Generator", Description: "Generate hashes from text.", URL: "/tools/hash-generator", Icon: "bi bi-fingerprint", Category: "Cryptography & Security"},
 
-	
 	{Name: "BIP39 Passphrase Generator", Description: "Generate BIP39 mnemonic passphrases.", URL: "/tools/bip39-generator", Icon: "bi bi-wallet2", Category: "Generators"},
 	{Name: "UUID Generator", Description: "Generate UUIDs.", URL: "/tools/uuid-generator", Icon: "bi bi-node-plus", Category: "Generators"},
 	{Name: "ULID Generator", Description: "Generate ULIDs.", URL: "/tools/ulid-generator", Icon: "bi bi-123", Category: "Generators"},
@@ -54,7 +60,6 @@ var OtherTools = []Tool{
 	{Name: "Lorem Ipsum Generator", Description: "Generate Lorem Ipsum placeholder text.", URL: "/tools/lorem-ipsum", Icon: "bi bi-file-text", Category: "Generators"},
 	{Name: "Crontab Generator", Description: "Generate crontab schedules.", URL: "/tools/crontab-generator", Icon: "bi bi-calendar-plus", Category: "Generators"},
 
-	
 	{Name: "Image Converter", Description: "Convert images between formats (PNG, JPG, WebP).", URL: "/tools/image-converter", Icon: "bi bi-image-alt", Category: "Converters"},
 	{Name: "YAML to JSON Converter", Description: "Convert YAML data to JSON.", URL: "/tools/yaml-to-json", Icon: "bi bi-file-earmark-code", Category: "Converters"},
 	{Name: "JSON to XML Converter", Description: "Convert JSON data to XML.", URL: "/tools/json-to-xml", Icon: "bi bi-file-earmark-code", Category: "Converters"},
@@ -67,21 +72,18 @@ var OtherTools = []Tool{
 	{Name: "URL Encoder/Decoder", Description: "Encode or decode URL components.", URL: "/tools/url-encoder", Icon: "bi bi-link-45deg", Category: "Converters"},
 	{Name: "Text Case Converter", Description: "Convert text to different cases (uppercase, lowercase, etc.).", URL: "/tools/case-converter", Icon: "bi bi-type", Category: "Converters"},
 
-	
 	{Name: "HTML Formatter", Description: "Format and beautify HTML code.", URL: "/tools/html-formatter", Icon: "bi bi-code-slash", Category: "Formatters & Validators"},
 	{Name: "JavaScript Formatter", Description: "Format and beautify JavaScript code.", URL: "/tools/js-formatter", Icon: "bi bi-file-earmark-code", Category: "Formatters & Validators"},
 	{Name: "CSS Formatter", Description: "Format and beautify CSS code.", URL: "/tools/css-formatter", Icon: "bi bi-file-earmark-code", Category: "Formatters & Validators"},
 	{Name: "JSON Formatter", Description: "Format and validate JSON data.", URL: "/tools/json-formatter", Icon: "bi bi-braces", Category: "Formatters & Validators"},
 	{Name: "Minifier", Description: "Minify CSS, JS, JSON, HTML, and SVG files.", URL: "/tools/minifier", Icon: "bi bi-file-zip", Category: "Formatters & Validators"},
 
-	
 	{Name: "cURL Builder", Description: "Build cURL commands with an easy interface.", URL: "/tools/curl-builder", Icon: "bi bi-terminal", Category: "Web & Network"},
 	{Name: "SVG Optimizer", Description: "Optimize SVG files for the web.", URL: "/tools/svg-optimizer", Icon: "bi bi-vector-pen", Category: "Web & Network"},
 	{Name: "Markdown Previewer", Description: "Instantly preview your Markdown files.", URL: "/tools/markdown-previewer", Icon: "bi bi-markdown", Category: "Web & Network"},
 	{Name: "Diff Checker", Description: "Compare two texts to see the differences.", URL: "/tools/diff-checker", Icon: "bi bi-distribute-vertical", Category: "Web & Network"},
 	{Name: "Text Statistics", Description: "Analyze text for word count, character count, etc.", URL: "/tools/text-stats", Icon: "bi bi-card-text", Category: "Web & Network"},
 
-	
 	{Name: "Git Cheatsheet", Description: "Quick reference for Git commands.", URL: "/tools/git-cheatsheet", Icon: "bi bi-git", Category: "Cheatsheets"},
 	{Name: "Linux Cheatsheet", Description: "Quick reference for Linux commands.", URL: "/tools/linux-cheatsheet", Icon: "bi bi-terminal-fill", Category: "Cheatsheets"},
 	{Name: "Regex Cheatsheet", Description: "Quick reference for regular expressions.", URL: "/tools/regex-cheatsheet", Icon: "bi bi-braces-asterisk", Category: "Cheatsheets"},

@@ -3,16 +3,45 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>devcortex.ai - Smart Tools for Developers</title>
-    <meta name="description" content="AI-powered, fast, and free developer tools for JSON, JWT, Base64, Hash, and more.">
+    {{/* Define variables for meta tags to avoid repetition */}}
+    {{$title := printf "%s - devcortex.ai" .Title}}
+    {{$description := .Description}}
+    {{if not .Description}}
+        {{$description = "A collection of smart, fast, and free developer tools, including JSON Formatter, JWT Debugger, Base64 Encoder, Hash Generator, and P2P Scrum Poker."}}
+    {{end}}
+    <title>{{$title}}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{$description}}">
+    <link rel="canonical" href="{{.CanonicalURL}}" />
+
+    <!-- Open Graph / Facebook / Discord Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://devcortex.ai/">
-    <meta property="og:title" content="devcortex.ai - Smart Tools for Developers">
-    <meta property="og:description" content="Fast and free developer tools for JSON, JWT, Base64, Hash, and more.">
-    
+    <meta property="og:url" content="{{.CanonicalURL}}">
+    <meta property="og:title" content="{{$title}}">
+    <meta property="og:description" content="{{$description}}">
+    <meta property="og:image" content="https://devcortex.ai/static/images/og-default.png">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{$title}}">
+    <meta name="twitter:description" content="{{$description}}">
+    <meta name="twitter:image" content="https://devcortex.ai/static/images/og-default.png">
+
+    <!-- Styles and Scripts -->
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/vapor/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/js/peer.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JBHEBPV3HZ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JBHEBPV3HZ');
+    </script>
 </head>
 <body>
     <div class="container mt-4">
@@ -57,5 +86,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>
