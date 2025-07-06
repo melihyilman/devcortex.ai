@@ -42,6 +42,7 @@ func DockerCheatsheetTool(w http.ResponseWriter, r *http.Request) {
 
 	data := &view.PageData{
 		Title:            "Docker Cheatsheet",
+		Description:      "A quick reference for essential Docker and Docker Compose commands, covering image and container management, system commands, and more.",
 		ToolSpecificData: cheatsheetData,
 	}
 	view.Render(w, r, "docker-cheatsheet.html", data)

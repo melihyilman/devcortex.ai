@@ -35,6 +35,7 @@ func FindCheatsheetTool(w http.ResponseWriter, r *http.Request) {
 
 	data := &view.PageData{
 		Title:            "Linux 'find' Cheatsheet",
+		Description:      "A quick reference for the powerful Linux 'find' command. Examples for searching by name, type, time, size, and executing commands on results.",
 		ToolSpecificData: cheatsheetData,
 	}
 	view.Render(w, r, "find-cheatsheet.html", data)
