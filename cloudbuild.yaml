@@ -13,7 +13,7 @@ steps:
   args: [
     'run', 'deploy', 'devcortex',
     '--image', 'gcr.io/$PROJECT_ID/devcortex:$COMMIT_SHA',
-    '--region', 'us-central1',  # Change to your preferred region
+    '--region', 'europe-west1',
     '--platform', 'managed',
     '--allow-unauthenticated'
   ]
