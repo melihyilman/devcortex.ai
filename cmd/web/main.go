@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"os"
 	"net/http"
+	"os"
 
 	"devcortex.ai/internal/handler"
 )
@@ -14,11 +14,9 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
 	handler.RegisterRoutes(mux)
 
-	
-	
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "9090" 
+		port = "8080"
 		log.Printf("Bilgi: PORT ortam değişkeni bulunamadı, varsayılan olarak %s kullanılıyor.", port)
 	}
 
