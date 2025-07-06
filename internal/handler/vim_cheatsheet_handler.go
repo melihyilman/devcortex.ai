@@ -46,6 +46,7 @@ func VimCheatsheetTool(w http.ResponseWriter, r *http.Request) {
 
 	data := &view.PageData{
 		Title:            "Vim Cheatsheet",
+		Description:      "A quick reference for the most common Vim commands, covering navigation, editing, search, and more. Perfect for beginners and experienced users.",
 		ToolSpecificData: cheatsheetData,
 	}
 	view.Render(w, r, "vim-cheatsheet.html", data)

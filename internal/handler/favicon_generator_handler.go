@@ -18,7 +18,8 @@ import (
 
 func FaviconGeneratorTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
-		Title: "Favicon Generator",
+		Title:       "Favicon Generator",
+		Description: "Generate a complete set of favicons (favicon.ico, PNG icons, apple-touch-icon) from a single image for all platforms.",
 	}
 
 	if r.Method == http.MethodPost {
