@@ -14,6 +14,11 @@ import (
 func JSONToCSVTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "JSON to CSV Converter",
+		ToolSpecificData: map[string]interface{}{
+			"JSONInput": r.URL.Query().Get("JSONInput"),
+			"Result":    r.URL.Query().Get("Result"),
+			"Success":   r.URL.Query().Get("Success") == "true",
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -29,7 +34,6 @@ func JSONToCSVTool(w http.ResponseWriter, r *http.Request) {
 			if len(jsonData) == 0 {
 				result = "The JSON array is empty."
 			} else {
-				// Get headers and sort them for consistent order
 				headers := []string{}
 				for key := range jsonData[0] {
 					headers = append(headers, key)
@@ -39,11 +43,9 @@ func JSONToCSVTool(w http.ResponseWriter, r *http.Request) {
 				var csvBuffer bytes.Buffer
 				csvWriter := csv.NewWriter(&csvBuffer)
 
-				// Write header
 				if err := csvWriter.Write(headers); err != nil {
 					result = "Error writing CSV header: " + err.Error()
 				} else {
-					// Write rows
 					for _, row := range jsonData {
 						record := []string{}
 						for _, header := range headers {
@@ -68,11 +70,13 @@ func JSONToCSVTool(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		data.ToolSpecificData = map[string]interface{}{
+		redirectData := map[string]string{
 			"JSONInput": jsonInput,
 			"Result":    result,
-			"Success":   success,
+			"Success":   fmt.Sprintf("%t", success),
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "json-to-csv.html", data)

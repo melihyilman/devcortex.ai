@@ -13,7 +13,11 @@ import (
 func ColorPickerTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "Color Picker / Converter",
-		ToolSpecificData: make(map[string]interface{}),
+		ToolSpecificData: map[string]interface{}{
+			"Hex": r.URL.Query().Get("Hex"),
+			"RGB": r.URL.Query().Get("RGB"),
+			"HSL": r.URL.Query().Get("HSL"),
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -26,15 +30,18 @@ func ColorPickerTool(w http.ResponseWriter, r *http.Request) {
 
 		color = strings.TrimPrefix(color, "#")
 
+		redirectData := make(map[string]string)
 		if len(color) == 6 {
 			r, _ := strconv.ParseInt(color[0:2], 16, 0)
 			g, _ := strconv.ParseInt(color[2:4], 16, 0)
 			b, _ := strconv.ParseInt(color[4:6], 16, 0)
 
-			data.ToolSpecificData.(map[string]interface{})["Hex"] = "#" + color
-			data.ToolSpecificData.(map[string]interface{})["RGB"] = fmt.Sprintf("rgb(%d, %d, %d)", r, g, b)
-			data.ToolSpecificData.(map[string]interface{})["HSL"] = rgbToHsl(int(r), int(g), int(b))
+			redirectData["Hex"] = "#" + color
+			redirectData["RGB"] = fmt.Sprintf("rgb(%d, %d, %d)", r, g, b)
+			redirectData["HSL"] = rgbToHsl(int(r), int(g), int(b))
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "color-picker.html", data)

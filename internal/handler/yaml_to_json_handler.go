@@ -23,8 +23,8 @@ func YAMLToJSONTool(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			result = "Error parsing YAML: " + err.Error()
 		} else {
-			// The yaml package unmarshals to map[interface{}]interface{}.
-			// We need to convert it to map[string]interface{} for JSON marshaling.
+			
+			
 			convertedData := convertYAMLMap(yamlData)
 			jsonData, err := json.MarshalIndent(convertedData, "", "  ")
 			if err != nil {
@@ -45,7 +45,7 @@ func YAMLToJSONTool(w http.ResponseWriter, r *http.Request) {
 	view.Render(w, r, "yaml-to-json.html", data)
 }
 
-// convertYAMLMap recursively converts map[interface{}]interface{} to map[string]interface{}
+
 func convertYAMLMap(i interface{}) interface{} {
 	switch x := i.(type) {
 	case map[interface{}]interface{}:

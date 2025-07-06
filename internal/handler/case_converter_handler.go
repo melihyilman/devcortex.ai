@@ -11,10 +11,12 @@ import (
 func CaseConverterTool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
 		Title: "Case Converter",
-		ToolSpecificData: make(map[string]interface{}),
+		ToolSpecificData: map[string]interface{}{
+			"InputText": r.URL.Query().Get("inputText"),
+			"CaseType":  r.URL.Query().Get("caseType"),
+			"Result":    r.URL.Query().Get("result"),
+		},
 	}
-
-	pageData.ToolSpecificData.(map[string]interface{})["CaseType"] = "snake"
 
 	if r.Method == http.MethodPost {
 		inputText := r.FormValue("inputText")
@@ -32,9 +34,13 @@ func CaseConverterTool(w http.ResponseWriter, r *http.Request) {
 			result = inputText
 		}
 
-		pageData.ToolSpecificData.(map[string]interface{})["InputText"] = inputText
-		pageData.ToolSpecificData.(map[string]interface{})["CaseType"] = caseType
-		pageData.ToolSpecificData.(map[string]interface{})["Result"] = result
+		data := map[string]string{
+			"inputText": inputText,
+			"caseType":  caseType,
+			"result":    result,
+		}
+		redirectToPageWithData(w, r, data)
+		return
 	}
 
 	view.Render(w, r, "case-converter.html", pageData)

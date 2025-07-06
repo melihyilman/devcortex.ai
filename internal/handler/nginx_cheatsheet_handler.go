@@ -29,7 +29,7 @@ func NginxCheatsheetTool(w http.ResponseWriter, r *http.Request) {
 			{Command: "location ~* \\.(gif|jpg|png)$ { ... }", Description: "Matches requests for common image formats (case-insensitive regex)."},
 		},
 		"Proxying": {
-			{Command: "proxy_pass http://backend_server;", Description: "Pass the request to a backend server."},
+			{Command: "proxy_pass http://backend;", Description: "Pass requests to a backend server."},
 			{Command: "proxy_set_header Host $host;", Description: "Pass the original host header to the backend."},
 			{Command: "proxy_set_header X-Real-IP $remote_addr;", Description: "Pass the client's real IP to the backend."},
 		},

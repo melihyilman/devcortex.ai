@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"fmt"
 
 	"devcortex.ai/internal/view"
 	"golang.org/x/crypto/bcrypt"
@@ -38,10 +39,12 @@ func BcryptTool(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		data.ToolSpecificData = map[string]interface{}{
-			"Result":  result,
-			"Success": success,
+		data := map[string]string{
+			"result":  result,
+			"success": fmt.Sprintf("%t", success),
 		}
+		redirectToPageWithData(w, r, data)
+		return
 	}
 
 	view.Render(w, r, "bcrypt-hash.html", data)

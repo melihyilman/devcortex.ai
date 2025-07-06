@@ -14,21 +14,34 @@ func CronTool(w http.ResponseWriter, r *http.Request) {
 		Title: "Cron Job Explainer & Generator",
 	}
 
-	toolData := make(map[string]interface{})
+	toolData := map[string]interface{}{
+		"Expression":    r.URL.Query().Get("Expression"),
+		"Error":         r.URL.Query().Get("Error"),
+		"Explanation":   r.URL.Query().Get("Explanation"),
+		"GeneratedCron": r.URL.Query().Get("GeneratedCron"),
+		"Input": map[string]string{
+			"minute":       r.URL.Query().Get("minute"),
+			"hour":         r.URL.Query().Get("hour"),
+			"day_of_month": r.URL.Query().Get("day_of_month"),
+			"month":        r.URL.Query().Get("month"),
+			"day_of_week":  r.URL.Query().Get("day_of_week"),
+		},
+	}
 
 	if r.Method == http.MethodPost {
 		action := r.FormValue("action")
+		redirectData := make(map[string]string)
 
 		if action == "explain" {
 			expression := strings.TrimSpace(r.FormValue("cron_expression"))
-			toolData["Expression"] = expression
+			redirectData["Expression"] = expression
 
 			cronService := tool.NewCronExplainer()
 			explanation, err := cronService.Explain(expression)
 			if err != nil {
-				toolData["Error"] = err.Error()
+				redirectData["Error"] = err.Error()
 			} else {
-				toolData["Explanation"] = explanation
+				redirectData["Explanation"] = explanation
 			}
 		} else if action == "generate" {
 			minute := r.FormValue("minute")
@@ -44,15 +57,15 @@ func CronTool(w http.ResponseWriter, r *http.Request) {
 				getPart(month),
 				getPart(dayOfWeek),
 			)
-			toolData["GeneratedCron"] = cronString
-			toolData["Input"] = map[string]string{
-				"minute":       minute,
-				"hour":         hour,
-				"day_of_month": dayOfMonth,
-				"month":        month,
-				"day_of_week":  dayOfWeek,
-			}
+			redirectData["GeneratedCron"] = cronString
+			redirectData["minute"] = minute
+			redirectData["hour"] = hour
+			redirectData["day_of_month"] = dayOfMonth
+			redirectData["month"] = month
+			redirectData["day_of_week"] = dayOfWeek
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	pageData.ToolSpecificData = toolData

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	"net/http"
 
 	"devcortex.ai/internal/handler"
@@ -10,12 +11,21 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	fileServer := http.FileServer(http.Dir("./web/static/"))
-
 	mux.Handle("/static/", http.StripPrefix("/static/", fileServer))
 	handler.RegisterRoutes(mux)
 
-	log.Println("Starting server... Listening on http://localhost:9090")
-	if err := http.ListenAndServe(":9090", mux); err != nil {
+	
+	
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9090" 
+		log.Printf("Bilgi: PORT ortam değişkeni bulunamadı, varsayılan olarak %s kullanılıyor.", port)
+	}
+
+	finalMux := http.Handler(handler.AnalyticsMiddleware(mux))
+
+	log.Printf("Sunucu http://localhost:%s adresinde başlatılıyor...", port)
+	if err := http.ListenAndServe(":"+port, finalMux); err != nil {
 		log.Fatal("Could not start server: ", err)
 	}
 }

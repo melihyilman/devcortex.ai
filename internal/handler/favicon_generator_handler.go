@@ -11,7 +11,7 @@ import (
 	"devcortex.ai/internal/view"
 	"github.com/nfnt/resize"
 
-	// Anonymous import for image decoding
+	
 	_ "image/jpeg"
 	_ "image/png"
 )
@@ -52,11 +52,11 @@ func FaviconGeneratorTool(w http.ResponseWriter, r *http.Request) {
 
 			f, err := zipWriter.Create(fileName)
 			if err != nil {
-				// handle error
+				
 			}
 			png.Encode(f, resizedImg)
 		}
-		// A proper .ico file contains multiple sizes. For simplicity, we'll just add the 32x32 as favicon.ico
+		
 		ico, _ := zipWriter.Create("favicon.ico")
 		png.Encode(ico, resize.Resize(32, 32, img, resize.Lanczos3))
 
@@ -65,7 +65,7 @@ func FaviconGeneratorTool(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/zip")
 		w.Header().Set("Content-Disposition", "attachment; filename=\"favicons.zip\"")
 		w.Write(zipBuffer.Bytes())
-		return // Return after writing the zip file
+		return 
 	}
 
 	view.Render(w, r, "favicon-generator.html", data)

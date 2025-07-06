@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"fmt"
 
 	"devcortex.ai/internal/view"
 	"github.com/tdewolff/minify/v2"
@@ -11,6 +12,11 @@ import (
 func JSFormatterTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "JavaScript Formatter",
+		ToolSpecificData: map[string]interface{}{
+			"JSInput": r.URL.Query().Get("JSInput"),
+			"Result":  r.URL.Query().Get("Result"),
+			"Success": r.URL.Query().Get("Success") == "true",
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -21,8 +27,6 @@ func JSFormatterTool(w http.ResponseWriter, r *http.Request) {
 		m := minify.New()
 		m.AddFunc("application/javascript", js.Minify)
 
-		// Note: This library is for minification. A true "pretty-printer" would require a different approach.
-		// For this tool, "formatting" means creating a syntactically correct, minified version.
 		minified, err := m.String("application/javascript", jsInput)
 		if err != nil {
 			result = "Error formatting JavaScript: " + err.Error()
@@ -31,11 +35,13 @@ func JSFormatterTool(w http.ResponseWriter, r *http.Request) {
 			success = true
 		}
 
-		data.ToolSpecificData = map[string]interface{}{
+		redirectData := map[string]string{
 			"JSInput": jsInput,
 			"Result":  result,
-			"Success": success,
+			"Success": fmt.Sprintf("%t", success),
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "js-formatter.html", data)

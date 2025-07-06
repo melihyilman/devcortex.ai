@@ -11,39 +11,36 @@ import (
 func Bip39GeneratorTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "BIP39 Passphrase Generator",
+		ToolSpecificData: map[string]interface{}{
+			"GeneratedMnemonic": r.URL.Query().Get("GeneratedMnemonic"),
+			"WordCount":         r.URL.Query().Get("WordCount"),
+		},
 	}
 
 	if r.Method == http.MethodPost {
 		wordCountStr := r.FormValue("word_count")
 		wordCount, err := strconv.Atoi(wordCountStr)
 		if err != nil || !isValidWordCount(wordCount) {
-			wordCount = 12 // Default to 12 words if invalid
+			wordCount = 12
 		}
 
-		// Entropy bits must be a multiple of 32
-		// 12 words = 128 bits, 24 words = 256 bits
+		var mnemonic string
 		entropy, err := bip39.NewEntropy((wordCount / 3) * 32)
 		if err != nil {
-			data.ToolSpecificData = map[string]interface{}{
-				"GeneratedMnemonic": "Error generating mnemonic",
+			mnemonic = "Error generating mnemonic"
+		} else {
+			mnemonic, err = bip39.NewMnemonic(entropy)
+			if err != nil {
+				mnemonic = "Error generating mnemonic"
 			}
-			view.Render(w, r, "bip39-generator.html", data)
-			return
 		}
 
-		mnemonic, err := bip39.NewMnemonic(entropy)
-		if err != nil {
-			data.ToolSpecificData = map[string]interface{}{
-				"GeneratedMnemonic": "Error generating mnemonic",
-			}
-			view.Render(w, r, "bip39-generator.html", data)
-			return
-		}
-
-		data.ToolSpecificData = map[string]interface{}{
+		redirectData := map[string]string{
 			"GeneratedMnemonic": mnemonic,
-			"WordCount":         wordCount,
+			"WordCount":         strconv.Itoa(wordCount),
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "bip39-generator.html", data)

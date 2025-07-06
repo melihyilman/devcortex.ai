@@ -24,8 +24,8 @@ func YAMLToTOMLTool(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			result = "Error parsing YAML: " + err.Error()
 		} else {
-			// The yaml package unmarshals to map[interface{}]interface{}.
-			// We need to convert it to map[string]interface{} for TOML marshaling.
+			
+			
 			convertedData := convertYAMLMap(yamlData)
 
 			var tomlBuffer bytes.Buffer

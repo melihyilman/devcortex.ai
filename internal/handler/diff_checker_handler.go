@@ -11,7 +11,11 @@ import (
 func DiffCheckerTool(w http.ResponseWriter, r *http.Request) {
 	pageData := &view.PageData{
 		Title: "Diff Checker",
-		ToolSpecificData: make(map[string]interface{}),
+		ToolSpecificData: map[string]interface{}{
+			"Text1": r.URL.Query().Get("Text1"),
+			"Text2": r.URL.Query().Get("Text2"),
+			"Diff":  r.URL.Query().Get("Diff"),
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -33,9 +37,13 @@ func DiffCheckerTool(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		pageData.ToolSpecificData.(map[string]interface{})["Text1"] = text1
-		pageData.ToolSpecificData.(map[string]interface{})["Text2"] = text2
-		pageData.ToolSpecificData.(map[string]interface{})["Diff"] = diffResult.String()
+		redirectData := map[string]string{
+			"Text1": text1,
+			"Text2": text2,
+			"Diff":  diffResult.String(),
+		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "diff-checker.html", pageData)

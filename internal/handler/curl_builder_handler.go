@@ -11,6 +11,15 @@ import (
 func CURLBuilderTool(w http.ResponseWriter, r *http.Request) {
 	data := &view.PageData{
 		Title: "cURL Command Builder",
+		ToolSpecificData: map[string]interface{}{
+			"CURLCommand": r.URL.Query().Get("CURLCommand"),
+			"Input": map[string]string{
+				"url":     r.URL.Query().Get("url"),
+				"method":  r.URL.Query().Get("method"),
+				"headers": r.URL.Query().Get("headers"),
+				"body":    r.URL.Query().Get("body"),
+			},
+		},
 	}
 
 	if r.Method == http.MethodPost {
@@ -36,15 +45,15 @@ func CURLBuilderTool(w http.ResponseWriter, r *http.Request) {
 			curlCmd.WriteString(fmt.Sprintf(" \\\n  -d '%s'", body))
 		}
 
-		data.ToolSpecificData = map[string]interface{}{
+		redirectData := map[string]string{
 			"CURLCommand": curlCmd.String(),
-			"Input": map[string]string{
-				"url":     url,
-				"method":  method,
-				"headers": headers,
-				"body":    body,
-			},
+			"url":         url,
+			"method":      method,
+			"headers":     headers,
+			"body":        body,
 		}
+		redirectToPageWithData(w, r, redirectData)
+		return
 	}
 
 	view.Render(w, r, "curl-builder.html", data)

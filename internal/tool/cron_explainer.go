@@ -7,20 +7,20 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
-// CronExplainer defines the interface for the cron explainer service.
+
 type CronExplainer interface {
 	Explain(expression string) (string, error)
 }
 
-// cronExplainer is the implementation of the CronExplainer interface.
+
 type cronExplainer struct{}
 
-// NewCronExplainer creates a new CronExplainer service.
+
 func NewCronExplainer() CronExplainer {
 	return &cronExplainer{}
 }
 
-// Explain validates and generates a human-readable explanation for a cron expression.
+
 func (s *cronExplainer) Explain(expression string) (string, error) {
 	if len(strings.Fields(expression)) != 5 {
 		return "", fmt.Errorf("please enter a valid 5-field cron expression")
@@ -38,7 +38,7 @@ func (s *cronExplainer) generateCronExplanation(expression string) string {
 	fields := strings.Fields(expression)
 	var parts []string
 
-	// Minute
+	
 	minute := fields[0]
 	if strings.HasPrefix(minute, "*/") {
 		parts = append(parts, fmt.Sprintf("every %s minutes", minute[2:]))
@@ -48,7 +48,7 @@ func (s *cronExplainer) generateCronExplanation(expression string) string {
 		parts = append(parts, fmt.Sprintf("at minute %s", minute))
 	}
 
-	// Hour
+	
 	hour := fields[1]
 	if strings.HasPrefix(hour, "*/") {
 		parts = append(parts, fmt.Sprintf("every %s hours", hour[2:]))
@@ -58,19 +58,19 @@ func (s *cronExplainer) generateCronExplanation(expression string) string {
 		parts = append(parts, fmt.Sprintf("at hour %s", hour))
 	}
 
-	// Day of Month
+	
 	dayOfMonth := fields[2]
 	if dayOfMonth != "*" {
 		parts = append(parts, fmt.Sprintf("on day-of-month %s", dayOfMonth))
 	}
 
-	// Month
+	
 	month := fields[3]
 	if month != "*" {
 		parts = append(parts, fmt.Sprintf("in month %s", month))
 	}
 
-	// Day of Week
+	
 	dayOfWeek := fields[4]
 	if dayOfWeek != "*" {
 		dayMap := map[string]string{

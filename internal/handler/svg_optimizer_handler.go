@@ -25,7 +25,7 @@ func SVGOptimizerTool(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 
-		// Ensure the uploaded file is an SVG
+		
 		if !strings.HasSuffix(strings.ToLower(header.Filename), ".svg") {
 			data.ToolSpecificData = map[string]interface{}{"Error": "Invalid file type. Please upload an SVG file."}
 			view.Render(w, r, "svg-optimizer.html", data)
@@ -47,7 +47,7 @@ func SVGOptimizerTool(w http.ResponseWriter, r *http.Request) {
 		reduction := 100 - (float64(optimizedSize) / float64(originalSize) * 100)
 
 		data.ToolSpecificData = map[string]interface{}{
-			"OriginalSVG":   "", // We don't show the original
+			"OriginalSVG":   "", 
 			"OptimizedSVG":  outputBuffer.String(),
 			"OriginalSize":  originalSize,
 			"OptimizedSize": optimizedSize,
