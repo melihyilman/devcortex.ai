@@ -1,6 +1,6 @@
 # DevCortex.ai
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/your-username/devcortex.ai)](https://goreportcard.com/report/github.com/your-username/devcortex.ai)
+[![Go Report Card](https://goreportcard.com/badge/github.com/melihyilman/devcortex.ai)](https://goreportcard.com/report/github.com/melihyilman/devcortex.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > 🚀 **A Modern, Privacy-First Toolbox for Developers**
@@ -97,14 +97,14 @@ To run the project on your local machine, follow these steps:
 
 ```sh
 # 1. Clone the repository
-git clone https://github.com/your-username/devcortex.ai.git
+git clone https://github.com/melihyilman/devcortex.ai.git
 cd devcortex.ai
 
 # 2. Tidy up Go modules
 go mod tidy
 
 # 3. Run the application
-go run ./cmd/web/main.go
+go run ./cmd/web
 ```
 
 it'll be working on `http://localhost:8080`
