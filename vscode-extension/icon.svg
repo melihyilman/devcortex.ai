@@ -1,0 +1,47 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Background Gradient -->
+        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1E293B;" />
+            <stop offset="100%" style="stop-color:#0F172A;" />
+        </linearGradient>
+
+        <!-- Icon Gradient (Purple -> Blue -> Cyan) -->
+        <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#A78BFA;" />
+            <stop offset="50%" style="stop-color:#3B82F6;" />
+            <stop offset="100%" style="stop-color:#22D3EE;" />
+        </linearGradient>
+
+        <!-- Glow Filter -->
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="256" height="256" rx="56" fill="url(#bg-gradient)"/>
+
+    <!-- Main Symbol Group -->
+    <g filter="url(#glow)">
+        <!-- Stylized Brain/Cortex Path -->
+        <path d="M128 48C104.6 48 85.3 59.7 72 76C58.7 59.7 39.4 48 16 48C-16 48 -16 96 16 96H48V160H16C-16 160 -16 208 16 208C39.4 208 58.7 196.3 72 180C85.3 196.3 104.6 208 128 208C151.4 208 170.7 196.3 184 180C197.3 196.3 216.6 208 240 208C272 208 272 160 240 160H208V96H240C272 96 272 48 240 48C216.6 48 197.3 59.7 184 76C170.7 59.7 151.4 48 128 48Z"
+              stroke="url(#icon-gradient)"
+              stroke-width="12"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+              transform="scale(0.8) translate(32, 32)"
+        />
+
+        <!-- Code Symbol </> -->
+        <g transform="translate(0, 4)">
+            <path d="M104 152 L74 128 L104 104" stroke="#E5E7EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M152 152 L182 128 L152 104" stroke="#E5E7EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+    </g>
+</svg>
