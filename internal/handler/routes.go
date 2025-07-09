@@ -75,4 +75,5 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/analytics", AnalyticsHandler)
 	mux.HandleFunc("/tools/peer-to-peer-scrum-poker", PeerToPeerScrumPokerHandler)
 	mux.HandleFunc("/sitemap.xml", SitemapHandler)
+	mux.HandleFunc("/extensions", ExtensionsHandler)
 }

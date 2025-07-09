@@ -1,0 +1,184 @@
+{
+  "name": "devcortex-developer-tools",
+  "displayName": "DevCortex Developer Tools",
+  "description": "A powerful set of developer tools to boost productivity. Includes generators, converters, encoders/decoders, hashing utilities, a mock API server, and more.",
+  "version": "1.0.3",
+  "publisher": "melihyilman",
+  "license": "MIT",
+  "icon": "icon-144x144.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melihyilman/devcortex.ai.git"
+  },
+  "homepage": "https://github.com/melihyilman/devcortex.ai.git/vscode-extension#readme",
+  "bugs": {
+    "url": "https://github.com/melihyilman/devcortex.ai.git/issues"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Testing",
+    "Other"
+  ],
+  "keywords": [
+    "devtools",
+    "utilities",
+    "json",
+    "csharp",
+    "uuid",
+    "base64",
+    "jwt",
+    "mock-api",
+    "developer-tools",
+    "devcortex"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devcortex.showTools",
+        "title": "Devcortex: Show All Tools"
+      },
+      {
+        "command": "devcortex.generateUuid",
+        "title": "Devcortex: Generate Random UUID"
+      },
+      {
+        "command": "devcortex.jsonToCsharp",
+        "title": "Devcortex: Convert JSON to C# (from selection)"
+      },
+      {
+        "command": "devcortex.base64",
+        "title": "Devcortex: Base64 Encode/Decode"
+      },
+      {
+        "command": "devcortex.url",
+        "title": "Devcortex: URL Encode/Decode"
+      },
+      {
+        "command": "devcortex.jwtDecode",
+        "title": "Devcortex: Decode JWT (from clipboard)"
+      },
+      {
+        "command": "devcortex.hashing",
+        "title": "Devcortex: Generate Hash"
+      },
+      {
+        "command": "devcortex.hmac",
+        "title": "Devcortex: HMAC Generator"
+      },
+      {
+        "command": "devcortex.bcrypt",
+        "title": "Devcortex: Bcrypt Hash/Verify"
+      },
+      {
+        "command": "devcortex.pasteJsonAsCode",
+        "title": "Devcortex: Paste JSON as Code (to C#, TS, etc.)"
+      },
+      {
+        "command": "devcortex.startMockApi",
+        "title": "Devcortex: Start Mock API from Selection"
+      },
+      {
+        "command": "devcortex.showDocumentation",
+        "title": "Devcortex: Show Documentation"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "devcortex.showTools",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "submenu": "devcortex.contextMenu",
+          "group": "1_modification"
+        }
+      ],
+      "devcortex.contextMenu": [
+        {
+          "command": "devcortex.generateUuid",
+          "group": "1_generators"
+        },
+        {
+          "command": "devcortex.startMockApi",
+          "group": "1_generators"
+        },
+        {
+          "command": "devcortex.jsonToCsharp",
+          "group": "2_converters"
+        },
+        {
+          "command": "devcortex.pasteJsonAsCode",
+          "group": "2_converters"
+        },
+        {
+          "command": "devcortex.base64",
+          "group": "3_encoders"
+        },
+        {
+          "command": "devcortex.url",
+          "group": "3_encoders"
+        },
+        {
+          "command": "devcortex.jwtDecode",
+          "group": "3_encoders"
+        },
+        {
+          "command": "devcortex.hashing",
+          "group": "4_crypto"
+        },
+        {
+          "command": "devcortex.hmac",
+          "group": "4_crypto"
+        },
+        {
+          "command": "devcortex.bcrypt",
+          "group": "4_crypto"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "devcortex.contextMenu",
+        "label": "Devcortex Tools"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/readable-stream": "^4.0.21",
+    "@types/urijs": "^1.19.25",
+    "@types/uuid": "^9.0.8",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.8.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jwt-decode": "^4.0.0",
+    "quicktype-core": "^6.0.7",
+    "uuid": "^9.0.1"
+  }
+}

@@ -1,0 +1,43 @@
+# Dependency directories
+/node_modules/
+
+# Build output
+/out/
+/dist/
+/build/
+*.vsix
+
+# VS Code specific
+.vscode-test/
+.vscode-test
+*.tsbuildinfo
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.history/
+
+# Test results
+/coverage/
+.nyc_output/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

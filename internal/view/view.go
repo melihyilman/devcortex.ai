@@ -40,6 +40,7 @@ type PageData struct {
 	FeaturedTools    []model.Tool
 	OtherTools       []model.Tool
 	ToolSpecificData interface{}
+	Content          template.HTML
 }
 
 func Render(w http.ResponseWriter, r *http.Request, tmpl string, data *PageData) {
