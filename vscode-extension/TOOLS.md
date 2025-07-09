@@ -1,3 +1,11 @@
+<div class="text-center my-4">
+    <a href="https://marketplace.visualstudio.com/items?itemName=melihyilman.devcortex-developer-tools" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-infinity me-2"></i>View on Visual Studio Marketplace<i class="bi bi-box-arrow-up-right ms-2"></i>
+    </a>
+</div>
+
+---
+
 # DevCortex Development Tools - Feature Guide
 
 This document provides an overview of the tools available in the DevCortex Development Tools extension for VS Code.
@@ -22,7 +30,7 @@ This document provides an overview of the tools available in the DevCortex Devel
     4.  The extension will start a server and provide you with the local URL.
 - **Example JSON Structure**:
 
-    !Start Mock API Example
+    ![Start Mock API Example](/static/images/extensions/Screenshot 2025-07-08 at 21.53.57.png)
 
     ```json
     {
@@ -61,7 +69,7 @@ This document provides an overview of the tools available in the DevCortex Devel
     3.  Select the target language (e.g., C#, TypeScript, Go, Java).
     4.  The generated code will be pasted into your active editor.
 
-    ![Paste JSON as Code Example](./example-usages/paste-json-as-code.gif)
+    ![Paste JSON as Code Example](/static/images/extensions/Screenshot 2025-07-08 at 21.54.23.png)
 
 - **Example**:
     - **JSON Input (in clipboard)**:
@@ -86,7 +94,7 @@ This document provides an overview of the tools available in the DevCortex Devel
     2.  Run the "JSON to C# (Selection)" command.
     3.  A new editor tab will open with the generated C# code.
 
-    !JSON to C# Example
+    ![JSON to C# Example](/static/images/extensions/Screenshot 2025-07-08 at 21.55.18.png)
 
 - **Example**:
     - **JSON Input (selected)**:
@@ -127,7 +135,7 @@ This document provides an overview of the tools available in the DevCortex Devel
 - **How to use**: Select the text you want to process and run the command. Choose "Encode" or "Decode" from the options. The result will replace your selection.
 - **Example**:
 
-    ![Base64 Encode/Decode Example](./example-usages/base64-encode-decode.gif)
+    ![Base64 Encode/Decode Example](/static/images/extensions/Screenshot 2025-07-08 at 21.55.58.png)
 
     - **Encode**: Select `Hello World` -> `SGVsbG8gV29ybGQ=`
     - **Decode**: Select `SGVsbG8gV29ybGQ=` -> `Hello World`
@@ -143,10 +151,10 @@ This document provides an overview of the tools available in the DevCortex Devel
 - **Description**: Decodes a JSON Web Token (JWT) from your clipboard to inspect its header and payload.
 - **How to use**: Copy a JWT to your clipboard and run the command. A new editor tab will open with the decoded JSON.
 
-    !JWT Decoder Example
+    ![JWT Decoder Example](/static/images/extensions/Screenshot 2025-07-08 at 21.53.57.png)
 
 - **Example**:
-    - **JWT Input (in clipboard)**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
+    - **JWT Input (in clipboard)**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
     - **Output**:
       ```json
       {
@@ -170,7 +178,7 @@ This document provides an overview of the tools available in the DevCortex Devel
 - **Description**: Generates a hash of the selected text using various algorithms.
 - **How to use**: Select the text you want to hash, run the command, and choose the desired algorithm (MD5, SHA1, SHA256, SHA512). The hash is copied to your clipboard.
 
-    !Hash Generator Example
+    ![Hash Generator Example](/static/images/extensions/Screenshot 2025-07-08 at 21.54.23.png)
 
 - **Example**:
     - **Input Text**: `devcortex`

@@ -1,3 +1,4 @@
+
 # DevCortex Development Tools - Feature Guide
 
 This document provides an overview of the tools available in the DevCortex Development Tools extension for VS Code.
@@ -146,7 +147,7 @@ This document provides an overview of the tools available in the DevCortex Devel
     !JWT Decoder Example
 
 - **Example**:
-    - **JWT Input (in clipboard)**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
+    - **JWT Input (in clipboard)**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
     - **Output**:
       ```json
       {
