@@ -1,17 +1,234 @@
-{{define "title"}}{{.Title}}{{end}}
-{{define "head"}}
+{{define "content"}}
+
 <style>
-    .markdown-body {
-        box-sizing: border-box;
-        min-width: 200px;
-        max-width: 980px;
-        margin: 0 auto;
-        padding: 45px;
+    .carousel-inner .carousel-item {
+        transition: transform 2s ease, opacity .5s ease-out;
+    }
+
+    .carousel-inner .carousel-item img {
+        height: 450px; /* Set a fixed height */
+        object-fit: cover; /* Cover the area without distortion */
+        width: auto;
+        margin: 0 auto; /* Center the image */
+    }
+
+    .carousel-inner .carousel-item:not(.active) {
+        opacity: 0.5; /* Make non-active items faded */
     }
 </style>
-{{end}}
-{{define "content"}}
+
 <div class="markdown-body">
-    {{.Content}}
+    <div class="text-center my-4">
+        <a href="https://marketplace.visualstudio.com/items?itemName=melihyilman.devcortex-developer-tools" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+            <i class="bi bi-infinity me-2"></i>View on Visual Studio Marketplace<i class="bi bi-box-arrow-up-right ms-2"></i>
+        </a>
+    </div>
+
+    <hr>
+
+    <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-src="/static/images/extensions/Screenshot 2025-07-08 at 21.53.57.png">
+                    <img src="/static/images/extensions/Screenshot 2025-07-08 at 21.53.57.png" class="d-block img-thumbnail" alt="Start Mock API Example">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-src="/static/images/extensions/Screenshot 2025-07-08 at 21.54.23.png">
+                    <img src="/static/images/extensions/Screenshot 2025-07-08 at 21.54.23.png" class="d-block img-thumbnail" alt="Paste JSON as Code Example">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-src="/static/images/extensions/Screenshot 2025-07-08 at 21.55.18.png">
+                    <img src="/static/images/extensions/Screenshot 2025-07-08 at 21.55.18.png" class="d-block img-thumbnail" alt="JSON to C# Example">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-src="/static/images/extensions/Screenshot 2025-07-08 at 21.55.58.png">
+                    <img src="/static/images/extensions/Screenshot 2025-07-08 at 21.55.58.png" class="d-block img-thumbnail" alt="Base64 Encode/Decode Example">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-src="/static/images/extensions/Screenshot 2025-07-08 at 21.53.57.png">
+                    <img src="/static/images/extensions/Screenshot 2025-07-08 at 21.53.57.png" class="d-block img-thumbnail" alt="JWT Decoder Example">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-img-src="/static/images/extensions/Screenshot 2025-07-08 at 21.54.23.png">
+                    <img src="/static/images/extensions/Screenshot 2025-07-08 at 21.54.23.png" class="d-block img-thumbnail" alt="Hash Generator Example">
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <hr>
+
+    <h1>DevCortex Development Tools - Feature Guide</h1>
+    <p>This document provides an overview of the tools available in the DevCortex Development Tools extension for VS Code.</p>
+
+    <hr>
+
+    <h2>1. Generators</h2>
+
+    <h3>Generate Random UUID</h3>
+    <ul>
+        <li><strong>Description</strong>: Generates a new version 4 (random) UUID and copies it directly to your clipboard.</li>
+        <li><strong>How to use</strong>: Run the command from the DevCortex Tools menu. A notification will confirm that the UUID has been copied.</li>
+        <li><strong>Example Output</strong>: <code>123e4567-e89b-12d3-a456-426614174000</code></li>
+    </ul>
+
+    <br>
+
+    <h3>Start Mock API from Selection</h3>
+    <ul>
+        <li><strong>Description</strong>: Quickly starts a local mock API server based on a JSON structure you've selected in your editor. This is great for front-end development when the back-end is not ready yet.</li>
+        <li><strong>How to use</strong>:
+            <ol>
+                <li>Create a JSON object in your editor that defines the API endpoints.</li>
+                <li>Select the entire JSON text.</li>
+                <li>Run the "Start Mock API from Selection" command.</li>
+                <li>The extension will start a server and provide you with the local URL.</li>
+            </ol>
+        </li>
+        <li><strong>Example JSON Structure</strong>:</li>
+    </ul>
+
+    <pre><code class="language-json">{
+    "/users": {
+        "GET": {
+            "response": [
+                {
+                    "userId": "uuid",
+                    "fullName": "fullName",
+                    "email": "email"
+                }
+            ]
+        }
+    },
+    "/products/{id}": {
+        "GET": {
+            "response": {
+                "productId": "number",
+                "productName": "string",
+                "price": 123.45
+            }
+        }
+    }
+}</code></pre>
+
+    <hr>
+
+    <h2>2. Converters</h2>
+
+    <h3>Paste JSON as Code</h3>
+    <ul>
+        <li><strong>Description</strong>: Converts a JSON object from your clipboard into typed classes or structs for various programming languages.</li>
+        <li><strong>How to use</strong>:
+            <ol>
+                <li>Copy a valid JSON object to your clipboard.</li>
+                <li>Run the "Paste JSON as Code" command.</li>
+                <li>Select the target language (e.g., C#, TypeScript, Go, Java).</li>
+                <li>The generated code will be pasted into your active editor.</li>
+            </ol>
+        </li>
+    </ul>
+
+    <h3>JSON to C# (Selection)</h3>
+    <ul>
+        <li><strong>Description</strong>: Converts the selected JSON text directly into C# classes.</li>
+        <li><strong>How to use</strong>:
+            <ol>
+                <li>Select a valid JSON object in your editor.</li>
+                <li>Run the "JSON to C# (Selection)" command.</li>
+                <li>A new editor tab will open with the generated C# code.</li>
+            </ol>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h2>3. Encoders / Decoders</h2>
+
+    <h3>Base64 Encoder / Decoder</h3>
+    <ul>
+        <li><strong>Description</strong>: Encodes the selected text to Base64 or decodes a Base64 string back to its original form.</li>
+        <li><strong>How to use</strong>: Select the text you want to process and run the command. Choose "Encode" or "Decode" from the options. The result will replace your selection.</li>
+    </ul>
+
+    <h3>URL Encoder / Decoder</h3>
+    <ul>
+        <li><strong>Description</strong>: Encodes or decodes text for safe use within a URL (percent-encoding).</li>
+        <li><strong>How to use</strong>: Select the text you want to process and run the command. Choose "Encode" or "Decode". The result will replace your selection.</li>
+    </ul>
+
+    <h3>JWT Decoder</h3>
+    <ul>
+        <li><strong>Description</strong>: Decodes a JSON Web Token (JWT) from your clipboard to inspect its header and payload.</li>
+        <li><strong>How to use</strong>: Copy a JWT to your clipboard and run the command. A new editor tab will open with the decoded JSON.</li>
+    </ul>
+
+    <hr>
+
+    <h2>4. Hashing & Cryptography</h2>
+
+    <h3>Hash Generator</h3>
+    <ul>
+        <li><strong>Description</strong>: Generates a hash of the selected text using various algorithms.</li>
+        <li><strong>How to use</strong>: Select the text you want to hash, run the command, and choose the desired algorithm (MD5, SHA1, SHA256, SHA512). The hash is copied to your clipboard.</li>
+    </ul>
+
+    <h3>HMAC Generator</h3>
+    <ul>
+        <li><strong>Description</strong>: Generates a Hash-based Message Authentication Code (HMAC) for the selected text.</li>
+        <li><strong>How to use</strong>: Select the text, run the command, and provide a secret key when prompted. The HMAC-SHA256 signature will be copied to your clipboard.</li>
+    </ul>
+
+    <h3>Bcrypt</h3>
+    <ul>
+        <li><strong>Description</strong>: A tool for working with bcrypt hashes. You can either generate a new hash for a string or verify a string against an existing bcrypt hash.</li>
+        <li><strong>How to use</strong>:
+            <ol>
+                <li><strong>Generate</strong>: Run the command, choose "Generate", and enter the string to hash. The hash is copied to your clipboard.</li>
+                <li><strong>Verify</strong>: Run the command, choose "Verify", enter the plain text string, and then enter the bcrypt hash to compare against. A notification will show if they match.</li>
+            </ol>
+        </li>
+    </ul>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="" class="img-fluid" id="modalImage" alt="Enlarged image">
+      </div>
+    </div>
+  </div>
+</div>
+
+{{end}}
+
+{{define "scripts"}}
+<script>
+    const imageModal = document.getElementById('imageModal');
+    if (imageModal) {
+        imageModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;
+            const imgSrc = button.getAttribute('data-bs-img-src');
+            const modalImage = imageModal.querySelector('#modalImage');
+            modalImage.src = imgSrc;
+        });
+    }
+</script>
 {{end}}
